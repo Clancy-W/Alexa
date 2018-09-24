@@ -75,11 +75,12 @@ app.post('/flip', requestVerifier, function(req, res) {
     });
   }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'RollDice'){
-    var sides = 6
+    var sides = 6;
     if (!(!req.body.request.intent.slots.sides ||
         !req.body.request.intent.slots.sides.value)) {
       sides = req.body.request.intent.slots.sides.value
     }
+    console.log(req.body.request.intent.slots.sides);
     res.json({
       "version": "1.0",
       "response": {
