@@ -94,9 +94,10 @@ app.post('/flip', requestVerifier, function(req, res) {
     });
   }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FlipMultiCoin'){
+    var times = 1;
     if (!(!req.body.request.intent.slots.num ||
         !req.body.request.intent.slots.num.value)) {
-      var times = req.body.request.intent.slots.num.value;
+      times = req.body.request.intent.slots.num.value;
       times = times.toInt();
     }
     var heads = 0
