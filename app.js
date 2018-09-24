@@ -54,5 +54,4 @@ app.post('/flip', requestVerifier, function(req, res) {
       false
     )
   )
-  }
 }); app.listen(3000);
