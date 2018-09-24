@@ -47,17 +47,31 @@ app.use(bodyParser.json({
 }));
 app.post('/flip', requestVerifier, function(req, res) {
   var a = "tails";
-  if (Math.random() > 0.5) {
-    a = "heads";
-  }
-  res.json({
-    "version": "1.0",
-    "response": {
-      "shouldEndSession": true,
-      "outputSpeech": {
-        "type": "SSML",
-        "ssml": "<speak>You flipped a <break time=\"1s\"/> "+ a +"</speak>"
+  if (req.body.request.type === 'LaunchRequest') {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Welcome to magic coin <break time=\"0.5s\"/> your decsion making tool</speak>"
+        }
       }
+    });
+  }
+  else {
+    if (Math.random() > 0.5) {
+      a = "heads";
     }
-  });
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>You flipped a <break time=\"1s\"/> "+ a +"</speak>"
+        }
+      }
+    });
+  }
 }); app.listen(app.get("port"));
