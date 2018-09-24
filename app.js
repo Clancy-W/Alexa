@@ -93,9 +93,9 @@ app.post('/flip', requestVerifier, function(req, res) {
     });
   }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FlipMultiCoin'){
-    if (!(!req.body.request.intent.slots.sides ||
-        !req.body.request.intent.slots.sides.value)) {
-      var times = req.body.request.intent.slots.sides.value.toInt();
+    if (!(!req.body.request.intent.slots.num ||
+        !req.body.request.intent.slots.num.value)) {
+      var times = req.body.request.intent.slots.num.value.toInt();
     }
     var heads = 0
     for (var i = 0; i < times; i++) {
@@ -103,7 +103,6 @@ app.post('/flip', requestVerifier, function(req, res) {
         heads++;
       }
     }
-    console.log(req.body.request.intent.slots.sides);
     res.json({
       "version": "1.0",
       "response": {
