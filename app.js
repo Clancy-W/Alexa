@@ -37,6 +37,7 @@ function buildResponse(session, speech, card, end) {
   };
 }
 
+app.set('port', process.env.PORT || 3000);
 
 
 app.use(bodyParser.json({
@@ -54,4 +55,4 @@ app.post('/flip', requestVerifier, function(req, res) {
       false
     )
   )
-}); app.listen(3000);
+}); app.listen(app.get("port"));
