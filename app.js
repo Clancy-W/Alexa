@@ -46,8 +46,8 @@ app.use(bodyParser.json({
   }
 }));
 app.post('/flip', requestVerifier, function(req, res) {
-  console.log("Request GOT")
-  var a = "tails"
+  console.log(Math.random());
+  var a = "tails";
   res.json({
     "version": "1.0",
     "response": {
