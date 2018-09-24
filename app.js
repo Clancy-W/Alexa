@@ -45,14 +45,13 @@ app.use(bodyParser.json({
   }
 }));
 app.post('/flip', requestVerifier, function(req, res) {
-  if (req.body.request.type === 'LaunchRequest') {
-    res.json(
-      buildResponse({
-          dateRequested: true
-        },
-        '<speak>I can tell you the weather<break time="1s"/> but you must give me a day!</speak>', {},
-        false
-      )
+  res.json(
+    buildResponse({
+        dateRequested: true
+      },
+      '<speak>I can tell you the weather<break time="1s"/> but you must give me a day!</speak>', {},
+      false
     )
-    }
-  }); app.listen(3000);
+  )
+  }
+}); app.listen(3000);
