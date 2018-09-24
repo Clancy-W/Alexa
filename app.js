@@ -78,7 +78,8 @@ app.post('/flip', requestVerifier, function(req, res) {
     var sides = 6;
     if (!(!req.body.request.intent.slots.sides ||
         !req.body.request.intent.slots.sides.value)) {
-      sides = req.body.request.intent.slots.sides.value.toInt();
+      sides = req.body.request.intent.slots.sides.value;
+      sides = sides.toInt()
     }
     console.log(req.body.request.intent.slots.sides);
     res.json({
@@ -95,7 +96,8 @@ app.post('/flip', requestVerifier, function(req, res) {
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FlipMultiCoin'){
     if (!(!req.body.request.intent.slots.num ||
         !req.body.request.intent.slots.num.value)) {
-      var times = req.body.request.intent.slots.num.value.toInt();
+      var times = req.body.request.intent.slots.num.value;
+      times = times.toInt();
     }
     var heads = 0
     for (var i = 0; i < times; i++) {
