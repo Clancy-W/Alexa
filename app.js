@@ -47,12 +47,14 @@ app.use(bodyParser.json({
 }));
 app.post('/flip', requestVerifier, function(req, res) {
   console.log("Request GOT")
-  res.json(
-    buildResponse({
-        dateRequested: true
-      },
-      '<speak>I can tell you the weather<break time="1s"/> but you must give me a day!</speak>', {},
-      false
-    )
-  )
+  res.json({
+    "version": "1.0",
+    "response": {
+      "shouldEndSession": true,
+      "outputSpeech": {
+        "type": "SSML",
+        "ssml": "<speak>Hmm <break time=\"1s\"/> What day do you want to know about?</speak>"
+      }
+    }
+  });
 }); app.listen(app.get("port"));
