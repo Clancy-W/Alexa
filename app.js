@@ -78,7 +78,7 @@ app.post('/flip', requestVerifier, function(req, res) {
     var sides = 6;
     if (!(!req.body.request.intent.slots.sides ||
         !req.body.request.intent.slots.sides.value)) {
-      sides = req.body.request.intent.slots.sides.value
+      sides = req.body.request.intent.slots.sides.value.toInt();
     }
     console.log(req.body.request.intent.slots.sides);
     res.json({
@@ -88,6 +88,29 @@ app.post('/flip', requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>You rolled a "+ Math.floor(Math.random() * sides + 1).toString() +" on a " + sides.toString()+" sided dice</speak>"
+        }
+      }
+    });
+  }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FlipMultiCoin'){
+    if (!(!req.body.request.intent.slots.sides ||
+        !req.body.request.intent.slots.sides.value)) {
+      var times = req.body.request.intent.slots.sides.value.toInt();
+    }
+    var heads = 0
+    for (var i = 0; i < times; i++) {
+      if (Math.random() > 0.5) {
+        heads++;
+      }
+    }
+    console.log(req.body.request.intent.slots.sides);
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>After flipping "+ times.toString() + " coins, " + heads.toString() + " of them were heads, and " + (times-heads).toString() + " of them were tails</speak>"
         }
       }
     });
