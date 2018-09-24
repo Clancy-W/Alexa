@@ -24,7 +24,7 @@ function requestVerifier(req, res, next) {
 
 function buildResponse(session, speech, card, end) {
   return {
-    version: "1.0.0",
+    version: "1.0",
     sessionAttributes: session,
     response: {
       outputSpeech: {
