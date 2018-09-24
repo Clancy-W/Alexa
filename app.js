@@ -48,10 +48,6 @@ app.use(bodyParser.json({
 app.post('/flip', requestVerifier, function(req, res) {
   console.log("Request GOT")
   var a = "tails"
-  if Math.random() > 0.5 {
-    console.log("HEADS")
-    a = "heads"
-  }
   res.json({
     "version": "1.0",
     "response": {
