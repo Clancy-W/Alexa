@@ -22,6 +22,22 @@ function requestVerifier(req, res, next) {
   );
 }
 
+function buildResponse(session, speech, card, end) {
+  return {
+    version: VERSION,
+    sessionAttributes: session,
+    response: {
+      outputSpeech: {
+        type: 'SSML',
+        ssml: speech
+      },
+      card: card,
+      shouldEndSession: !!end
+    }
+  };
+}
+
+
 
 app.use(bodyParser.json({
   verify: function getRawBody(req, res, buf) {
@@ -30,16 +46,13 @@ app.use(bodyParser.json({
 }));
 app.post('/flip', requestVerifier, function(req, res) {
   if (req.body.request.type === 'LaunchRequest') {
-    res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": true,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>Hmm <break time=\"1s\"/> What day do you want to know about?</speak>"
-        }
-      }
-    });
-  }
-});
-app.listen(3000);
+    res.json(
+      buildResponse({
+          dateRequested: true
+        },
+        '<speak>I can tell you the weather<break time="1s"/> but you must give me a day!</speak>', {},
+        false
+      )
+    )
+    }
+  }); app.listen(3000);
