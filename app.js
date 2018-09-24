@@ -45,6 +45,7 @@ app.use(bodyParser.json({
   }
 }));
 app.post('/flip', requestVerifier, function(req, res) {
+  console.log("Request GOT")
   res.json(
     buildResponse({
         dateRequested: true
