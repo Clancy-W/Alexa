@@ -68,7 +68,7 @@ app.post('/quote', requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>" + obj.quotes[0] + "</speak>"
+          "ssml": "<speak>" + obj.quotes[Math.floor(Math.random() * obj.quotes.length + 1)] + "</speak>"
         }
       }
     });
