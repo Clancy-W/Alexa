@@ -3,6 +3,8 @@ let express = require('express'),
   app = express();
 
 let alexaVerifier = require('alexa-verifier'); // at the top of our file
+var obj = require("inspiration.json");
+console.log(obj)
 
 function requestVerifier(req, res, next) {
   alexaVerifier(
