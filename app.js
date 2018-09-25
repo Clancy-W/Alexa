@@ -55,7 +55,7 @@ app.post('/quote', requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to quotable, your tool for good quotes</speak>"
+          "ssml": "<speak>Welcome to quotable, your tool for good quotes that will inspire you!</speak>"
         }
       }
     });
@@ -90,6 +90,40 @@ app.post('/quote', requestVerifier, function(req, res) {
       }
     });
   }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'QuoteOfTheYesterday'){
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay);
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Yesterday's quote of the day is... " + obj.quotes[day-1] + "</speak>"
+        }
+      }
+    });
+  }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'QuoteOfTheTomorrow'){
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay);
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Tomorrow's quote of the day is... " + obj.quotes[day+1] + "</speak>"
+        }
+      }
+    });
+  }
   else {
     res.json({
       "version": "1.0",
@@ -97,7 +131,7 @@ app.post('/quote', requestVerifier, function(req, res) {
         "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Goodbye</speak>"
+          "ssml": "<speak>Goodbye, we hope to see you soon!</speak>"
         }
       }
     });
