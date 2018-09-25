@@ -115,4 +115,16 @@ app.post('/flip', requestVerifier, function(req, res) {
       }
     });
   }
+  else {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Goodbye</speak>"
+        }
+      }
+    });
+  }
 }); app.listen(app.get("port"));
