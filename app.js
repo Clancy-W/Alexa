@@ -168,71 +168,113 @@ app.post('/flip', requestVerifier, function(req, res) {
     });
   }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'RollDice'){
-    var sides = 6;
-    if (!(!req.body.request.intent.slots.sides ||
-        !req.body.request.intent.slots.sides.value)) {
-      sides = parseInt(req.body.request.intent.slots.sides.value);
-    }
-    console.log(req.body.request.intent.slots.sides);
-    res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": false,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>You rolled a "+ Math.floor(Math.random() * sides + 1).toString() +" on a " + sides.toString()+" sided dice</speak>"
-        }
+    if (req.body.request.intent.slots.sides.value !== "?" && req.body.request.intent.slots.sides.value !== "0") {
+      var sides = 6;
+      if (!(!req.body.request.intent.slots.sides ||
+          !req.body.request.intent.slots.sides.value)) {
+        sides = parseInt(req.body.request.intent.slots.sides.value);
       }
-    });
+      console.log(req.body.request.intent.slots.sides);
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>You rolled a "+ Math.floor(Math.random() * sides + 1).toString() +" on a " + sides.toString()+" sided dice</speak>"
+          }
+        }
+      });
+    }
+    else {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>Do not say that!</speak>"
+          }
+        }
+      });
+    }
   }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FlipMultiCoin'){
-    var times = 1;
-    if (!(!req.body.request.intent.slots.num ||
-        !req.body.request.intent.slots.num.value)) {
-      times = parseInt(req.body.request.intent.slots.num.value);
-    }
-    var heads = 0
-    for (var i = 0; i < times; i++) {
-      if (Math.random() > 0.5) {
-        heads++;
+    if (req.body.request.intent.slots.num.value != "?" && req.body.request.intent.slots.num.value != "0") {
+      var times = 1;
+      if (!(!req.body.request.intent.slots.num ||
+          !req.body.request.intent.slots.num.value)) {
+        times = parseInt(req.body.request.intent.slots.num.value);
       }
-    }
-    res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": false,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>After flipping "+ times.toString() + " coins, " + heads.toString() + " of them were heads, and " + (times-heads).toString() + " of them were tails</speak>"
+      var heads = 0
+      for (var i = 0; i < times; i++) {
+        if (Math.random() > 0.5) {
+          heads++;
         }
       }
-    });
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>After flipping "+ times.toString() + " coins, " + heads.toString() + " of them were heads, and " + (times-heads).toString() + " of them were tails</speak>"
+          }
+        }
+      });
+    }
+    else {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>Do not say that!</speak>"
+          }
+        }
+      });
+    }
   }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'RollMultiDice'){
-    var sides = 6;
-    if (!(!req.body.request.intent.slots.sides ||
-        !req.body.request.intent.slots.sides.value)) {
-      sides = parseInt(req.body.request.intent.slots.sides.value);
-    }
-    var num = 2;
-    if (!(!req.body.request.intent.slots.num ||
-        !req.body.request.intent.slots.num.value)) {
-      num = parseInt(req.body.request.intent.slots.num.value);
-    }
-    var sum = 0;
-    for (var i = 0; i < num; i++) {
-      sum += Math.floor(Math.random() * sides + 1);
-    }
-    res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": false,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>After rolling "+ num.toString() + " die, the sum of them were " + sum.toString() + "</speak>"
-        }
+    if (req.body.request.intent.slots.num.value != "?" && req.body.request.intent.slots.num.value != "0" && req.body.request.intent.slots.sides.value != "?" && req.body.request.intent.slots.sides.value != "0") {
+      var sides = 6;
+      if (!(!req.body.request.intent.slots.sides ||
+          !req.body.request.intent.slots.sides.value)) {
+        sides = parseInt(req.body.request.intent.slots.sides.value);
       }
-    });
+      var num = 2;
+      if (!(!req.body.request.intent.slots.num ||
+          !req.body.request.intent.slots.num.value)) {
+        num = parseInt(req.body.request.intent.slots.num.value);
+      }
+      var sum = 0;
+      for (var i = 0; i < num; i++) {
+        sum += Math.floor(Math.random() * sides + 1);
+      }
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>After rolling "+ num.toString() + " die, the sum of them were " + sum.toString() + "</speak>"
+          }
+        }
+      });
+    }
+    else {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>Do not say that!</speak>"
+          }
+        }
+      });
+    }
   }
   else {
     res.json({
