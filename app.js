@@ -221,9 +221,7 @@ app.post('/flip', requestVerifier, function(req, res) {
     }
     var sum = 0;
     for (var i = 0; i < times; i++) {
-      if (Math.random() > 0.5) {
-        sum += Math.floor(Math.random() * sides + 1).toString();
-      }
+      sum += Math.floor(Math.random() * sides + 1).toString();
     }
     res.json({
       "version": "1.0",
@@ -231,7 +229,7 @@ app.post('/flip', requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>After rolling "+ num.toString() + " die, the sum of them were" + sum.toString() + "</speak>"
+          "ssml": "<speak>After rolling "+ num.toString() + " die, the sum of them were " + sum.toString() + "</speak>"
         }
       }
     });
