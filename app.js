@@ -3,7 +3,6 @@ let express = require('express'),
   app = express();
 
 let alexaVerifier = require('alexa-verifier'); // at the top of our file
-var obj = require("inspiration.json");
 
 function requestVerifier(req, res, next) {
   alexaVerifier(
@@ -68,7 +67,7 @@ app.post('/quote', requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>" + obj.quotes[0] + "</speak>"
+          "ssml": "<speak>" + "obj.quotes[0]" + "</speak>"
         }
       }
     });
