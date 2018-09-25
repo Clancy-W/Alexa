@@ -220,7 +220,7 @@ app.post('/flip', requestVerifier, function(req, res) {
       num = parseInt(req.body.request.intent.slots.num.value);
     }
     var sum = 0;
-    for (var i = 0; i < times; i++) {
+    for (var i = 0; i < num; i++) {
       sum += Math.floor(Math.random() * sides + 1).toString();
     }
     res.json({
