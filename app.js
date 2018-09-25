@@ -221,7 +221,7 @@ app.post('/flip', requestVerifier, function(req, res) {
     }
     var sum = 0;
     for (var i = 0; i < num; i++) {
-      sum += Math.floor(Math.random() * sides + 1).toString();
+      sum += Math.floor(Math.random() * sides + 1);
     }
     res.json({
       "version": "1.0",
