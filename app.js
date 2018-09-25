@@ -73,6 +73,23 @@ app.post('/quote', requestVerifier, function(req, res) {
       }
     });
   }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'QuoteOfTheDay'){
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay);
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>The quote of the day is... " + obj.quotes[day] + "</speak>"
+        }
+      }
+    });
+  }
   else {
     res.json({
       "version": "1.0",
