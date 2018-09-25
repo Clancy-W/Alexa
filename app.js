@@ -79,7 +79,7 @@ app.post('/flip', requestVerifier, function(req, res) {
     if (!(!req.body.request.intent.slots.sides ||
         !req.body.request.intent.slots.sides.value)) {
       sides = req.body.request.intent.slots.sides.value;
-      sides = sides.toInt()
+      sides = sides.parseInt()
     }
     console.log(req.body.request.intent.slots.sides);
     res.json({
@@ -98,7 +98,7 @@ app.post('/flip', requestVerifier, function(req, res) {
     if (!(!req.body.request.intent.slots.num ||
         !req.body.request.intent.slots.num.value)) {
       times = req.body.request.intent.slots.num.value;
-      times = times.toInt();
+      times = times.parseInt();
     }
     var heads = 0
     for (var i = 0; i < times; i++) {
