@@ -45,7 +45,7 @@ app.use(bodyParser.json({
     req.rawBody = buf.toString();
   }
 }));
-app.post('/flip', requestVerifier, function(req, res) {
+app.post('/quote', requestVerifier, function(req, res) {
   var a = "tails";
   if (req.body.request.type === 'LaunchRequest') {
     res.json({
@@ -54,63 +54,19 @@ app.post('/flip', requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to magic coin <break time=\"0.5s\"/> your decision making tool</speak>"
+          "ssml": "<speak>Welcome to quotable, your tool for good quotes</speak>"
         }
       }
     });
   }
-  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FlipCoin'){
-    if (Math.random() > 0.5) {
-      a = "heads";
-    }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'Inspire'){
     res.json({
       "version": "1.0",
       "response": {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>You flipped a "+ a +"</speak>"
-        }
-      }
-    });
-  }
-  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'RollDice'){
-    var sides = 6;
-    if (!(!req.body.request.intent.slots.sides ||
-        !req.body.request.intent.slots.sides.value)) {
-      sides = parseInt(req.body.request.intent.slots.sides.value);
-    }
-    console.log(req.body.request.intent.slots.sides);
-    res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": false,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>You rolled a "+ Math.floor(Math.random() * sides + 1).toString() +" on a " + sides.toString()+" sided dice</speak>"
-        }
-      }
-    });
-  }
-  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FlipMultiCoin'){
-    var times = 1;
-    if (!(!req.body.request.intent.slots.num ||
-        !req.body.request.intent.slots.num.value)) {
-      times = parseInt(req.body.request.intent.slots.num.value);
-    }
-    var heads = 0
-    for (var i = 0; i < times; i++) {
-      if (Math.random() > 0.5) {
-        heads++;
-      }
-    }
-    res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": false,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>After flipping "+ times.toString() + " coins, " + heads.toString() + " of them were heads, and " + (times-heads).toString() + " of them were tails</speak>"
+          "ssml": "<speak>Inspiring quote!</speak>"
         }
       }
     });
