@@ -55,7 +55,7 @@ app.post('/quote', requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to quotable, your tool for good quotes that will inspire you!</speak>"
+          "ssml": "<speak>Welcome to Daily Quote, your tool for good quotes that will inspire you, for information about what it can do, just say help.</speak>"
         }
       }
     });
@@ -65,7 +65,7 @@ app.post('/quote', requestVerifier, function(req, res) {
     res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": false,
+        "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>" + obj.quotes[Math.floor(Math.random() * obj.quotes.length + 1)] + "</speak>"
@@ -82,7 +82,7 @@ app.post('/quote', requestVerifier, function(req, res) {
     res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": false,
+        "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>The quote of the day is... " + obj.quotes[day] + "</speak>"
@@ -99,7 +99,7 @@ app.post('/quote', requestVerifier, function(req, res) {
     res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": false,
+        "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>Yesterday's quote of the day is... " + obj.quotes[day-1] + "</speak>"
@@ -116,10 +116,22 @@ app.post('/quote', requestVerifier, function(req, res) {
     res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": false,
+        "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>Tomorrow's quote of the day is... " + obj.quotes[day+1] + "</speak>"
+        }
+      }
+    });
+  }
+  else if (req.body.request.type === "HelpRequest") {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>To get the quote of thhe day, just say: \"What is the quote of the day?\", you can also do this for yesterday and tomorrow!... To get a random quote, just say: \"Inspire me\", come on, try it out for yourself!</speak>"
         }
       }
     });
