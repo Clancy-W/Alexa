@@ -1,6 +1,7 @@
 let express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
+  stringSimilarity = require('string-similarity'),
   app = express();
 
 let alexaVerifier = require('alexa-verifier'); // at the top of our file
@@ -35,7 +36,7 @@ const options = {
 
 request(options, function(err, res, body) {
     let json = JSON.parse(body);
-    console.log(json.applist.apps[0].name);
+    console.log(stringSimilarity.compareTwoStrings(json.applist.apps[0].name, 'Deidcated Server'));
 });
 
 
