@@ -176,5 +176,5 @@ app.post('/steam', requestVerifier, function(req, res) {
       }
     });
   }
-}
+});
 app.listen(app.get("port"));
