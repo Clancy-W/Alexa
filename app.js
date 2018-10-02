@@ -197,16 +197,32 @@ app.post('/steam', requestVerifier, function(req, res) {
   else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === 'GamePrice') {
     if (!(!req.body.request.intent.slots.game || !req.body.request.intent.slots.game.value)) {
       var temp = json[games.indexOf(stringSimilarity.findBestMatch(req.body.request.intent.slots.game.value, games).bestMatch.target)]
-      res.json({
-        "version": "1.0",
-        "response": {
-          "shouldEndSession": false,
-          "outputSpeech": {
-            "type": "SSML",
-            "ssml": "<speak>We found " + temp.name +", with the ID of " + temp.appid + ".</speak>"
-          }
+
+      var ops = {
+        url: 'https://store.steampowered.com/api/appdetails?appids=' + temp.appid + '&cc=us&l=en',
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Accept-Charset': 'utf-8'
         }
+      };
+
+
+      request(ops, function(err, resp, body) {
+        var info = JSON.parse(body)[temp.appid];
+        res.json({
+          "version": "1.0",
+          "response": {
+            "shouldEndSession": false,
+            "outputSpeech": {
+              "type": "SSML",
+              "ssml": "<speak>We found " + temp.name +", which cost a total of $" + (info.price_overview.final/100).toString() + ".</speak>"
+            }
+          }
+        });
       });
+
+
     }
 
   }
