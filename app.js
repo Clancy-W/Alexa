@@ -44,7 +44,7 @@ request(options, function(err, res, body) {
   }
 
 });
-console.log(games[0] + json[0].name);
+console.log(json);
 
 app.set('port', process.env.PORT || 3000);
 
