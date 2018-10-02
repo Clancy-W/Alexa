@@ -38,7 +38,7 @@ request(options, function(err, res, body) {
   let json = JSON.parse(body);
   var games = [];
   for (var i = 0; i < json.applist.apps.length; i++) {
-    games.push(json.applist.apps[i]);
+    games.push(json.applist.apps[i].name);
   }
 
   stringSimilarity.findBestMatch('Clste', games).bestMatch;
