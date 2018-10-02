@@ -44,6 +44,7 @@ request(options, function(err, res, body) {
   }
 
 });
+console.log(json);
 
 app.set('port', process.env.PORT || 3000);
 
