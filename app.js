@@ -216,7 +216,7 @@ app.post('/steam', requestVerifier, function(req, res) {
             "shouldEndSession": false,
             "outputSpeech": {
               "type": "SSML",
-              "ssml": "<speak>We found " + temp.name +", which cost a total of $" + (info.price_overview.final/100).toString() + ".</speak>"
+              "ssml": "<speak>We found " + temp.name +", which cost a total of " + (info.price_overview.final/100).toString() + ".</speak>"
             }
           }
         });
