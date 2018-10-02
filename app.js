@@ -227,7 +227,7 @@ app.post('/steam', requestVerifier, function(req, res) {
               "shouldEndSession": false,
               "outputSpeech": {
                 "type": "SSML",
-                "ssml": "<speak>We could not find a price for" + temp.name + ".</speak>"
+                "ssml": "<speak>We could not find a price for " + temp.name + ".</speak>"
               }
             }
           });
