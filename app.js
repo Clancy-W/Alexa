@@ -34,7 +34,7 @@ const options = {
   }
 };
 
-var json = {};
+var json = [];
 var games = [];
 
 request(options, function(err, res, body) {
