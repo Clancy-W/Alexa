@@ -41,7 +41,7 @@ request(options, function(err, res, body) {
     games.push(json.applist.apps[i].name);
   }
 
-  stringSimilarity.findBestMatch('Clste', games).bestMatch;
+  console.log(stringSimilarity.findBestMatch('Clste', games).bestMatch);
 });
 
 
