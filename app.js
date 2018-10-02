@@ -26,17 +26,22 @@ function requestVerifier(req, res, next) {
 }
 
 const options = {
-    url: 'http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=STEAMKEY&format=json',
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'Accept-Charset': 'utf-8'
-    }
+  url: 'http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=STEAMKEY&format=json',
+  method: 'GET',
+  headers: {
+    'Accept': 'application/json',
+    'Accept-Charset': 'utf-8'
+  }
 };
 
 request(options, function(err, res, body) {
-    let json = JSON.parse(body);
-    console.log(stringSimilarity.compareTwoStrings(json.applist.apps[0].name, 'Deidcated Server'));
+  let json = JSON.parse(body);
+  var games = [];
+  for (var i = 0; i < json.applist.apps.length; i++) {
+    games.push(json.applist.apps[i]);
+  }
+
+  stringSimilarity.findBestMatch('Clste', games).bestMatch;
 });
 
 
