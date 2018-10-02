@@ -207,19 +207,32 @@ app.post('/steam', requestVerifier, function(req, res) {
         }
       };
 
-
       request(ops, function(err, resp, body) {
         var info = JSON.parse(body)[temp.appid];
-        res.json({
-          "version": "1.0",
-          "response": {
-            "shouldEndSession": false,
-            "outputSpeech": {
-              "type": "SSML",
-              "ssml": "<speak>We found " + temp.name +", which cost a total of $" + (info.data.price_overview.final/100).toString() + ".</speak>"
+        if (info.data.price_overview.final) {
+          res.json({
+            "version": "1.0",
+            "response": {
+              "shouldEndSession": false,
+              "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak>We found " + temp.name +", which cost a total of $" + (info.data.price_overview.final/100).toString() + ".</speak>"
+              }
             }
-          }
-        });
+          });
+        }
+        else {
+          res.json({
+            "version": "1.0",
+            "response": {
+              "shouldEndSession": false,
+              "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak>We could not find a price for" + temp.name + ".</speak>"
+              }
+            }
+          });
+        }
       });
 
 
