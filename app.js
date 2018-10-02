@@ -35,15 +35,14 @@ const options = {
 };
 
 request(options, function(err, res, body) {
-  let json = JSON.parse(body);
+  let json = JSON.parse(body).applist.apps;
   var games = [];
-  for (var i = 0; i < json.applist.apps.length; i++) {
-    games.push(json.applist.apps[i].name);
+  for (var i = 0; i < json.length; i++) {
+    games.push(json[i].name);
   }
 
-  console.log(stringSimilarity.findBestMatch('Cleste Sond', games).bestMatch);
 });
-
+console.log(games[0] + json[0].name);
 
 app.set('port', process.env.PORT || 3000);
 
