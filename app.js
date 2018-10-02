@@ -34,11 +34,11 @@ const options = {
   }
 };
 
-var json = [];
+let json = [];
 var games = [];
 
 request(options, function(err, res, body) {
-  var json = JSON.parse(body).applist.apps;
+  json = JSON.parse(body).applist.apps;
   for (var i = 0; i < json.length; i++) {
     games.push(json[i].name);
   }
