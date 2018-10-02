@@ -208,7 +208,7 @@ app.post('/steam', requestVerifier, function(req, res) {
 
       request(ops, function(err, resp, body) {
         var info = JSON.parse(body)[temp.appid];
-        if (info.data.price_overview.final) {
+        if (info.data.price_overview) {
           res.json({
             "version": "1.0",
             "response": {
