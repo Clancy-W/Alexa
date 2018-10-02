@@ -197,7 +197,7 @@ app.post('/steam', requestVerifier, function(req, res) {
   else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === 'GamePrice') {
     if (!(!req.body.request.intent.slots.game || !req.body.request.intent.slots.game.value)) {
       var temp = json[games.indexOf(stringSimilarity.findBestMatch(req.body.request.intent.slots.game.value, games).bestMatch.target)]
-
+      console.log(temp);
       var ops = {
         url: 'https://store.steampowered.com/api/appdetails?appids=' + temp.appid + '&cc=us&l=en',
         method: 'GET',
