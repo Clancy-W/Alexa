@@ -196,13 +196,14 @@ app.post('/steam', requestVerifier, function(req, res) {
   }
   else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === 'GamePrice') {
     if (!(!req.body.request.intent.slots.game || !req.body.request.intent.slots.game.value)) {
+      var temp = json[games.indexOf(stringSimilarity.findBestMatch(req.body.request.intent.slots.game.value, games).bestMatch.target)]
       res.json({
         "version": "1.0",
         "response": {
           "shouldEndSession": false,
           "outputSpeech": {
             "type": "SSML",
-            "ssml": "<speak>We found" + stringSimilarity.findBestMatch(req.body.request.intent.slots.game.value, games).bestMatch.target +".</speak>"
+            "ssml": "<speak>We found " + temp.name +", with the ID of " + temp.appid + ".</speak>"
           }
         }
       });
