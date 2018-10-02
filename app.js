@@ -34,7 +34,7 @@ const options = {
   }
 };
 
-let json = [];
+var json = [];
 var games = [];
 
 request(options, function(err, res, body) {
@@ -44,7 +44,6 @@ request(options, function(err, res, body) {
   }
 
 });
-console.log(json);
 
 app.set('port', process.env.PORT || 3000);
 
@@ -182,6 +181,33 @@ app.post('/steam', requestVerifier, function(req, res) {
         }
       }
     });
+  }
+  else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === 'AMAZON.HelpIntent') {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>To get the quote of the day, just say: \"What is the quote of the day?\", you can also do this for yesterday and tomorrow!... To get a random quote, just say: \"Inspire me\", come on, try it out for yourself!</speak>"
+        }
+      }
+    });
+  }
+  else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === 'GamePrice') {
+    if (!(!req.body.request.intent.slots.game || !req.body.request.intent.slots.game.value)) {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>We found" + stringSimilarity.findBestMatch(req.body.request.intent.slots.game.value, games).bestMatch.target +".</speak>"
+          }
+        }
+      });
+    }
+
   }
 });
 app.listen(app.get("port"));
