@@ -177,19 +177,7 @@ app.post('/steam', requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>To get the quote of the day, just say: \"What is the quote of the day?\", you can also do this for yesterday and tomorrow!... To get a random quote, just say: \"Inspire me\", come on, try it out for yourself!</speak>"
-        }
-      }
-    });
-  }
-  else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === 'AMAZON.HelpIntent') {
-    res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": false,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>To get the quote of the day, just say: \"What is the quote of the day?\", you can also do this for yesterday and tomorrow!... To get a random quote, just say: \"Inspire me\", come on, try it out for yourself!</speak>"
+          "ssml": "<speak>To get the price of a game, for example Cuphead, just say: \"What is the price of Cuphead?\" To get a description, just say: \"Describe Cuphead\", come on, try it out for yourself!</speak>"
         }
       }
     });
@@ -205,7 +193,6 @@ app.post('/steam', requestVerifier, function(req, res) {
           'Accept-Charset': 'utf-8'
         }
       };
-
       request(ops, function(err, resp, body) {
         var info = JSON.parse(body)[temp.appid];
         if (info.data.price_overview) {
@@ -233,10 +220,102 @@ app.post('/steam', requestVerifier, function(req, res) {
           });
         }
       });
+    }
+  }
+  else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === 'GameDescription') {
+    if (!(!req.body.request.intent.slots.game || !req.body.request.intent.slots.game.value)) {
+      var temp = json[games.indexOf(stringSimilarity.findBestMatch(req.body.request.intent.slots.game.value, games).bestMatch.target)];
+      var ops = {
+        url: 'https://store.steampowered.com/api/appdetails?appids=' + temp.appid + '&cc=us&l=en',
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Accept-Charset': 'utf-8'
+        }
+      };
 
-
+      request(ops, function(err, resp, body) {
+        var info = JSON.parse(body)[temp.appid];
+        if (info.data.short_description) {
+          res.json({
+            "version": "1.0",
+            "response": {
+              "shouldEndSession": false,
+              "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak>Here is a description of " + temp.name +": " + info.data.short_description + ".</speak>"
+              }
+            }
+          });
+        }
+        else {
+          res.json({
+            "version": "1.0",
+            "response": {
+              "shouldEndSession": false,
+              "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak>We could not find a description for " + temp.name + ".</speak>"
+              }
+            }
+          });
+        }
+      });
     }
 
+  }
+  else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === 'GameGenre') {
+    if (!(!req.body.request.intent.slots.game || !req.body.request.intent.slots.game.value)) {
+      var temp = json[games.indexOf(stringSimilarity.findBestMatch(req.body.request.intent.slots.game.value, games).bestMatch.target)];
+      var ops = {
+        url: 'https://store.steampowered.com/api/appdetails?appids=' + temp.appid + '&cc=us&l=en',
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Accept-Charset': 'utf-8'
+        }
+      };
+
+      request(ops, function(err, resp, body) {
+        var info = JSON.parse(body)[temp.appid];
+        if (info.data.genres) {
+          res.json({
+            "version": "1.0",
+            "response": {
+              "shouldEndSession": false,
+              "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak>Here is a genre " + temp.name +" fits into: " + info.data.genres[0].description + ".</speak>"
+              }
+            }
+          });
+        }
+        else {
+          res.json({
+            "version": "1.0",
+            "response": {
+              "shouldEndSession": false,
+              "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak>We could not find a description for " + temp.name + ".</speak>"
+              }
+            }
+          });
+        }
+      });
+    }
+  }
+  else {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Sorry, we did not understand, could you try something else?</speak>"
+        }
+      }
+    });
   }
 });
 app.listen(app.get("port"));
