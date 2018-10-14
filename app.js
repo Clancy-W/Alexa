@@ -11,12 +11,19 @@ admin.initializeApp({
 
 var db = admin.firestore();
 
-var docRef = db.collection('users').doc('alovelace');
+var docRef = db.collection('users').doc('test');
 
 var setAda = docRef.set({
-  first: 'Ada',
-  last: 'Lovelace',
-  born: 1815
+  yoshi: {
+    name: "Yoshi",
+    type: "Dog",
+    lastFed: new Date()
+  },
+  arty: {
+    name: "Arty",
+    type: "Cat",
+    lastFed: new Date()
+  }
 });
 
 
