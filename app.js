@@ -5,6 +5,21 @@ let express = require('express'),
   app = express(),
   admin = require('firebase-admin');
 
+admin.initializeApp({
+  credential: admin.credential.cert(JSON.parse(process.env.id))
+});
+
+var db = admin.firestore();
+
+var docRef = db.collection('users').doc('alovelace');
+
+var setAda = docRef.set({
+  first: 'Ada',
+  last: 'Lovelace',
+  born: 1815
+});
+
+
 let alexaVerifier = require('alexa-verifier'); // at the top of our file
 var obj = require("./inspiration.json")
 
