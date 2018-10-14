@@ -2,10 +2,14 @@ let express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
   stringSimilarity = require('string-similarity'),
-  app = express();
+  app = express(),
+  admin = require('firebase-admin');
 
 let alexaVerifier = require('alexa-verifier'); // at the top of our file
 var obj = require("./inspiration.json")
+
+
+console.log(process.env.id);
 
 function requestVerifier(req, res, next) {
   alexaVerifier(
