@@ -83,7 +83,6 @@ app.use(bodyParser.json({
   }
 }));
 app.post('/quote', requestVerifier, function(req, res) {
-  var a = "tails";
   if (req.body.request.type === 'LaunchRequest') {
     res.json({
       "version": "1.0",
@@ -228,7 +227,7 @@ app.post('/steam', requestVerifier, function(req, res) {
           res.json({
             "version": "1.0",
             "response": {
-              "shouldEndSession": false,
+              "shouldEndSession": true,
               "outputSpeech": {
                 "type": "SSML",
                 "ssml": "<speak>We found " + temp.name +", which cost a total of $" + (info.data.price_overview.final/100).toString() + ".</speak>"
@@ -240,7 +239,7 @@ app.post('/steam', requestVerifier, function(req, res) {
           res.json({
             "version": "1.0",
             "response": {
-              "shouldEndSession": false,
+              "shouldEndSession": true,
               "outputSpeech": {
                 "type": "SSML",
                 "ssml": "<speak>We could not find a price for " + temp.name + ".</speak>"
@@ -269,7 +268,7 @@ app.post('/steam', requestVerifier, function(req, res) {
           res.json({
             "version": "1.0",
             "response": {
-              "shouldEndSession": false,
+              "shouldEndSession": true,
               "outputSpeech": {
                 "type": "SSML",
                 "ssml": "<speak>Here is a description of " + temp.name +": " + info.data.short_description + ".</speak>"
@@ -281,7 +280,7 @@ app.post('/steam', requestVerifier, function(req, res) {
           res.json({
             "version": "1.0",
             "response": {
-              "shouldEndSession": false,
+              "shouldEndSession": true,
               "outputSpeech": {
                 "type": "SSML",
                 "ssml": "<speak>We could not find a description for " + temp.name + ".</speak>"
@@ -311,7 +310,7 @@ app.post('/steam', requestVerifier, function(req, res) {
           res.json({
             "version": "1.0",
             "response": {
-              "shouldEndSession": false,
+              "shouldEndSession": true,
               "outputSpeech": {
                 "type": "SSML",
                 "ssml": "<speak>Here is a genre " + temp.name +" fits into: " + info.data.genres[0].description + ".</speak>"
@@ -323,7 +322,7 @@ app.post('/steam', requestVerifier, function(req, res) {
           res.json({
             "version": "1.0",
             "response": {
-              "shouldEndSession": false,
+              "shouldEndSession": true,
               "outputSpeech": {
                 "type": "SSML",
                 "ssml": "<speak>We could not find a description for " + temp.name + ".</speak>"
@@ -338,10 +337,10 @@ app.post('/steam', requestVerifier, function(req, res) {
     res.json({
       "version": "1.0",
       "response": {
-        "shouldEndSession": false,
+        "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Sorry, we did not understand, could you try something else?</speak>"
+          "ssml": "<speak>Goodbye, we hope to see you soon!</speak>"
         }
       }
     });
