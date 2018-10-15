@@ -23,7 +23,7 @@ console.log(process.env.id);
 function addPet(u, n, t) {
   var docRef = db.collection('users').doc(u);
   var temps = {}
-  temps[u] = {
+  temps[n] = {
     name: n,
     type: t,
     lastFed: new Date()
