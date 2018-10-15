@@ -8,7 +8,7 @@ let express = require('express'),
 admin.initializeApp({
   credential: admin.credential.cert(JSON.parse(process.env.id))
 });
-
+var FieldValue = require('firebase-admin').firestore.FieldValue;
 var db = admin.firestore();
 
 
@@ -31,21 +31,18 @@ function addPet(u, n, t) {
   var setAda = docRef.set(temps, {merge: true});
 }
 
-function deletePet(u, n, t) {
+function deletePet(u, n) {
   var docRef = db.collection('users').doc(u);
-
-  var setAda = docRef.set({
-    yoshi: {
-      name: n,
-      type: t,
-      lastFed: new Date()
-    }
-  });
+  var temps = {}
+  temps[n] = FieldValue.delete();
+  var removeCapital = docRef.update(temps);
 }
 
 
 addPet("test", "Doggo", "dog")
 addPet("test", "CatName", "cat")
+deletePet("test", "Doggo")
+addPet("test", "Yoshi", "dog")
 
 
 
