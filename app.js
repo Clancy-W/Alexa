@@ -39,7 +39,6 @@ function deletePet(u, n) {
 }
 
 
-addPet("test", "Doggo", "dog")
 addPet("test", "CatName", "cat")
 deletePet("test", "Doggo")
 addPet("test", "Yoshi", "dog")
