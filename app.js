@@ -34,9 +34,7 @@ function addPet(u, n, t) {
 function updatePet(u, n) {
   var docRef = db.collection('users').doc(u);
   var temps = {}
-  temps[n] = {
-    lastFed: FieldValue.serverTimestamp()
-  };
+  temps[n+".lastFed"] = FieldValue.serverTimestamp();
   var setAda = docRef.update(temps);
 }
 
