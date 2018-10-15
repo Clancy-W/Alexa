@@ -45,13 +45,6 @@ function deletePet(u, n) {
   var removeCapital = docRef.update(temps);
 }
 
-
-updatePet("test", "Yoshi");
-addPet("test", "CatName", "bird");
-
-
-
-
 function requestVerifier(req, res, next) {
   alexaVerifier(
     req.headers.signaturecertchainurl,
@@ -362,4 +355,39 @@ app.post('/steam', requestVerifier, function(req, res) {
     });
   }
 });
+app.post("/pet", requestVerifier, function(req, res) {
+  if (req.body.request.type === 'LaunchRequest') {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Welcome to Pet Feeder, we help you remember to feed your pets, for information about what we can do, just say help.</speak>"
+        }
+      }
+    });
+  }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddPet'){
+    if ((!req.body.request.intent.slots.pet || !req.body.request.intent.slots.pet.value)) {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "type": "Dialog.Delegate",
+          "updatedIntent": req.body.request
+        }
+      });
+    }
+    else if ((!req.body.request.intent.slots.name || !req.body.request.intent.slots.name.value)) {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "type": "Dialog.Delegate",
+          "updatedIntent": req.body.request
+        }
+      });
+    }
+
+  }
+})
 app.listen(app.get("port"));
