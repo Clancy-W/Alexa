@@ -26,9 +26,18 @@ function addPet(u, n, t) {
   temps[n] = {
     name: n,
     type: t,
-    lastFed: new Date()
+    lastFed: FieldValue.serverTimestamp()
   };
   var setAda = docRef.set(temps, {merge: true});
+}
+
+function updatePet(u, n) {
+  var docRef = db.collection('users').doc(u);
+  var temps = {}
+  temps[n] = {
+    lastFed: FieldValue.serverTimestamp()
+  };
+  var setAda = docRef.update(temps);
 }
 
 function deletePet(u, n) {
@@ -39,9 +48,8 @@ function deletePet(u, n) {
 }
 
 
-addPet("test", "CatName", "cat")
-deletePet("test", "Doggo")
-addPet("test", "Yoshi", "dog")
+updatePet("test", "CatName", "cat");
+addPet("test", "Yoshi", "bird");
 
 
 
