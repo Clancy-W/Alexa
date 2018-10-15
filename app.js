@@ -46,8 +46,8 @@ function deletePet(u, n) {
 }
 
 
-updatePet("test", "CatName");
-addPet("test", "Yoshi", "bird");
+updatePet("test", "Yoshi");
+addPet("test", "CatName", "bird");
 
 
 
