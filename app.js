@@ -32,9 +32,35 @@ function addPet(u, n, t) {
   });
 }
 
+function deletePet(u, n, t) {
+  var docRef = db.collection('users').doc(u);
+
+  var setAda = docRef.set({
+    yoshi: {
+      name: n,
+      type: t,
+      lastFed: new Date()
+    }
+  });
+}
+
 
 addPet("test", "Doggo", "dog")
 addPet("pest", "CatName", "cat")
+
+var cityRef = db.collection('users').doc('test');
+var getDoc = cityRef.get()
+    .then(doc => {
+      if (!doc.exists) {
+        console.log('No such document!');
+      } else {
+        console.log('Document data:', doc.data());
+      }
+    })
+    .catch(err => {
+      console.log('Error getting document', err);
+    });
+
 
 function requestVerifier(req, res, next) {
   alexaVerifier(
