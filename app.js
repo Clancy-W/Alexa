@@ -21,15 +21,26 @@ var obj = require("./inspiration.json")
 console.log(process.env.id);
 
 function addPet(u, n, t) {
+  var tempdict = {}
   var docRef = db.collection('users').doc(u);
+  var getDoc = db.collection('users').doc(u).get()
+    .then(doc => {
+      if (!doc.exists) {
 
-  var setAda = docRef.set({
-    yoshi: {
-      name: n,
-      type: t,
-      lastFed: new Date()
-    }
-  });
+      } else {
+        tempdict = doc.data();
+      }
+    })
+    .catch(err => {
+      console.log('Error getting document', err);
+    });
+
+  tempdict[u] = {
+    name: n,
+    type: t,
+    lastFed: new Date()
+  }
+  var setAda = docRef.set(tempdict);
 }
 
 function deletePet(u, n, t) {
@@ -46,20 +57,9 @@ function deletePet(u, n, t) {
 
 
 addPet("test", "Doggo", "dog")
-addPet("pest", "CatName", "cat")
+addPet("test", "CatName", "cat")
 
-var cityRef = db.collection('users').doc('test');
-var getDoc = cityRef.get()
-    .then(doc => {
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        console.log('Document data:', doc.data());
-      }
-    })
-    .catch(err => {
-      console.log('Error getting document', err);
-    });
+
 
 
 function requestVerifier(req, res, next) {
