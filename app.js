@@ -21,26 +21,14 @@ var obj = require("./inspiration.json")
 console.log(process.env.id);
 
 function addPet(u, n, t) {
-  var tempdict = {}
   var docRef = db.collection('users').doc(u);
-  var getDoc = db.collection('users').doc(u).get()
-    .then(doc => {
-      if (!doc.exists) {
-
-      } else {
-        tempdict = doc.data();
-      }
-    })
-    .catch(err => {
-      console.log('Error getting document', err);
-    });
-
-  tempdict[u] = {
+  var temps = {}
+  temps[u] = {
     name: n,
     type: t,
     lastFed: new Date()
-  }
-  var setAda = docRef.set(tempdict);
+  };
+  var setAda = docRef.set(temps, {merge: true});
 }
 
 function deletePet(u, n, t) {
