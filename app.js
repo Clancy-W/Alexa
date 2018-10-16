@@ -382,8 +382,12 @@ app.post("/pet", requestVerifier, function(req, res) {
       res.json({
         "version": "1.0",
         "response": {
-          "type": "Dialog.Delegate",
-          "updatedIntent": req.body.request.intent
+          "directives": [
+            {
+              "type": "Dialog.Delegate",
+              "updatedIntent": req.body.request.intent
+            }
+          ]
         }
       });
     }
