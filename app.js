@@ -72,6 +72,8 @@ const options = {
   }
 };
 
+deletePet("user", "name")
+
 var json = [];
 var games = [];
 
