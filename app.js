@@ -395,11 +395,36 @@ app.post("/pet", requestVerifier, function(req, res) {
         }
       });
     }
-    else {
+    else if (req.body.request.intent.confirmationStatus == "NONE") {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "directives": [
+            {
+              "type": "Dialog.Delegate",
+              "updatedIntent": req.body.request.intent
+            }
+          ]
+        }
+      });
+    }
+    else if (req.body.request.intent.confirmationStatus == "DENIED") {
       res.json({
         "version": "1.0",
         "response": {
           "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>We cancelled it, try asking again!</speak>"
+          }
+        }
+      });
+    }
+    else {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": true,
           "outputSpeech": {
             "type": "SSML",
             "ssml": "<speak>We added your pet " + req.body.request.intent.slots.pet.value +" called " + req.body.request.intent.slots.name.value + ".</speak>"
