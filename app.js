@@ -372,13 +372,13 @@ app.post("/pet", requestVerifier, function(req, res) {
     if ((!req.body.request.intent.slots.pet || !req.body.request.intent.slots.pet.value)) {
       res.json({
         "type": "Dialog.Delegate",
-        "updatedIntent": req.body.request
+        "updatedIntent": req.body.request.intent
       });
     }
     else if ((!req.body.request.intent.slots.name || !req.body.request.intent.slots.name.value)) {
       res.json({
         "type": "Dialog.Delegate",
-        "updatedIntent": req.body.request
+        "updatedIntent": req.body.request.intent
       });
     }
     else {
