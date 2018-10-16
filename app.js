@@ -72,7 +72,12 @@ const options = {
   }
 };
 
-deletePet("user", "name")
+try {
+  deletePet("user", "name")
+}
+catch(err) {
+  console.log(err)
+}
 
 var json = [];
 var games = [];
