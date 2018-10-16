@@ -72,13 +72,6 @@ const options = {
   }
 };
 
-try {
-  deletePet("user", "name")
-}
-catch(err) {
-  console.log(err)
-}
-
 var json = [];
 var games = [];
 
@@ -403,7 +396,6 @@ app.post("/pet", requestVerifier, function(req, res) {
       });
     }
     else {
-      addPet(req.body.session.user.userId, req.body.request.intent.slots.name.value, req.body.request.intent.slots.pet.value)
       res.json({
         "version": "1.0",
         "response": {
@@ -414,6 +406,38 @@ app.post("/pet", requestVerifier, function(req, res) {
           }
         }
       });
+      addPet(req.body.session.user.userId, req.body.request.intent.slots.name.value, req.body.request.intent.slots.pet.value);
+
+    }
+
+  }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'DeletePet'){
+    if ((!req.body.request.intent.slots.name || !req.body.request.intent.slots.name.value)) {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "directives": [
+            {
+              "type": "Dialog.Delegate",
+              "updatedIntent": req.body.request.intent
+            }
+          ]
+        }
+      });
+    }
+    else {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>We deleted your pet called " + req.body.request.intent.slots.name.value + ".</speak>"
+          }
+        }
+      });
+      deletePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
+
     }
 
   }
