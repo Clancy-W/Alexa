@@ -373,8 +373,12 @@ app.post("/pet", requestVerifier, function(req, res) {
       res.json({
         "version": "1.0",
         "response": {
-          "type": "Dialog.Delegate",
-          "updatedIntent": req.body.request.intent
+          "directives": [
+            {
+              "type": "Dialog.Delegate",
+              "updatedIntent": req.body.request.intent
+            }
+          ]
         }
       });
     }
@@ -392,13 +396,14 @@ app.post("/pet", requestVerifier, function(req, res) {
       });
     }
     else {
+      addPet(req.body.session.user.userId, req.body.request.intent.slots.name.value, req.body.request.intent.slots.pet.value)
       res.json({
         "version": "1.0",
         "response": {
           "shouldEndSession": false,
           "outputSpeech": {
             "type": "SSML",
-            "ssml": "<speak>Welcome to Pet Feeder, we help you remember to feed your pets, for information about what we can do, just say help.</speak>"
+            "ssml": "<speak>We added your pet " + req.body.request.intent.slots.pet.value +" called " + req.body.request.intent.slots.name.value + ".</speak>"
           }
         }
       });
