@@ -371,19 +371,25 @@ app.post("/pet", requestVerifier, function(req, res) {
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddPet'){
     if ((!req.body.request.intent.slots.pet || !req.body.request.intent.slots.pet.value)) {
       res.json({
-        "version": "1.0",
-        "response": {
-          "type": "Dialog.Delegate",
-          "updatedIntent": req.body.request
-        }
+        "type": "Dialog.Delegate",
+        "updatedIntent": req.body.request
       });
     }
     else if ((!req.body.request.intent.slots.name || !req.body.request.intent.slots.name.value)) {
       res.json({
+        "type": "Dialog.Delegate",
+        "updatedIntent": req.body.request
+      });
+    }
+    else {
+      res.json({
         "version": "1.0",
         "response": {
-          "type": "Dialog.Delegate",
-          "updatedIntent": req.body.request
+          "shouldEndSession": false,
+          "outputSpeech": {
+            "type": "SSML",
+            "ssml": "<speak>Welcome to Pet Feeder, we help you remember to feed your pets, for information about what we can do, just say help.</speak>"
+          }
         }
       });
     }
