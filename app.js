@@ -412,6 +412,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 
   }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'DeletePet'){
+    console.log("1");
     if ((!req.body.request.intent.slots.name || !req.body.request.intent.slots.name.value)) {
       res.json({
         "version": "1.0",
@@ -426,16 +427,18 @@ app.post("/pet", requestVerifier, function(req, res) {
       });
     }
     else {
+      console.log("2");
       res.json({
         "version": "1.0",
         "response": {
-          "shouldEndSession": false,
+          "shouldEndSession": true,
           "outputSpeech": {
             "type": "SSML",
             "ssml": "<speak>We deleted your pet called " + req.body.request.intent.slots.name.value + ".</speak>"
           }
         }
       });
+      console.log("3");
       deletePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
 
     }
