@@ -368,6 +368,54 @@ app.post("/pet", requestVerifier, function(req, res) {
       }
     });
   }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AMAZON.HelpIntent') {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>To find out how to add a pet ask, how do I add a pet? To find out how to delete a pet ask, how do I delete a pet? To find out how to feed a pet, ask how do I feed a pet?</speak>"
+        }
+      }
+    });
+  }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddHelp') {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>To add a pet, just tell Alexa to add a pet, come on, try it yourself!</speak>"
+        }
+      }
+    });
+  }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'DeleteHelp') {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>To delete a pet, just tell Alexa to delete a pet, come on, try it yourself!</speak>"
+        }
+      }
+    });
+  }
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FeedHelp') {
+    res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>To feed a pet, just tell Alexa to feed your pet, come on, try it yourself!</speak>"
+        }
+      }
+    });
+  }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddPet'){
     if ((!req.body.request.intent.slots.pet || !req.body.request.intent.slots.pet.value)) {
       res.json({
@@ -437,7 +485,6 @@ app.post("/pet", requestVerifier, function(req, res) {
 
   }
   else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'DeletePet'){
-    console.log("1");
     if ((!req.body.request.intent.slots.name || !req.body.request.intent.slots.name.value)) {
       res.json({
         "version": "1.0",
@@ -452,7 +499,6 @@ app.post("/pet", requestVerifier, function(req, res) {
       });
     }
     else {
-      console.log("2");
       res.json({
         "version": "1.0",
         "response": {
@@ -463,10 +509,24 @@ app.post("/pet", requestVerifier, function(req, res) {
           }
         }
       });
-      console.log("3");
       deletePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
 
     }
+
+  }
+  else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === "FeedPet") {
+    var cityRef = db.collection('users').doc(req.body.session.user.userId);
+    var getDoc = cityRef.get()
+    .then(doc => {
+      if (!doc.exists) {
+        console.log('No such document!');
+      } else {
+        console.log('Document data:', doc.data());
+      }
+    })
+    .catch(err => {
+      console.log('Error getting document', err);
+    });
 
   }
 })
