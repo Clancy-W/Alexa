@@ -515,18 +515,63 @@ app.post("/pet", requestVerifier, function(req, res) {
 
   }
   else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === "FeedPet") {
-    var cityRef = db.collection('users').doc(req.body.session.user.userId);
-    var getDoc = cityRef.get()
-    .then(doc => {
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        console.log('Document data:', doc.data());
-      }
-    })
-    .catch(err => {
-      console.log('Error getting document', err);
-    });
+    if ((!req.body.request.intent.slots.name || !req.body.request.intent.slots.name.value)) {
+      res.json({
+        "version": "1.0",
+        "response": {
+          "directives": [
+            {
+              "type": "Dialog.Delegate",
+              "updatedIntent": req.body.request.intent
+            }
+          ]
+        }
+      });
+    }
+    else {
+      var cityRef = db.collection('users').doc(req.body.session.user.userId);
+      var getDoc = cityRef.get()
+      .then(doc => {
+        if (!doc.exists) {
+          res.json({
+            "version": "1.0",
+            "response": {
+              "shouldEndSession": false,
+              "outputSpeech": {
+                "type": "SSML",
+                "ssml": "<speak>We couldn't find a pet with that name, try again.</speak>"
+              }
+            }
+          });
+        } else {
+          if (doc.data().hasOwnProperty(req.body.request.intent.slots.name.value)) {
+            updatePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
+            res.json({
+              "version": "1.0",
+              "response": {
+                "shouldEndSession": true,
+                "outputSpeech": {
+                  "type": "SSML",
+                  "ssml": "<speak>We fed your pet!</speak>"
+                }
+              }
+            });
+          }
+          else {
+            res.json({
+              "version": "1.0",
+              "response": {
+                "shouldEndSession": false,
+                "outputSpeech": {
+                  "type": "SSML",
+                  "ssml": "<speak>We couldn't find a pet with that name, try again.</speak>"
+                }
+              }
+            });
+          }
+        }
+      })
+    }
 
   }
 })
