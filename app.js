@@ -546,7 +546,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         } else {
           if (doc.data().hasOwnProperty(req.body.request.intent.slots.name.value)) {
             updatePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
-            console.log(doc.data());
+            console.log(doc.data()[req.body.request.intent.slots.name.value].lastFed.toDate());
             res.json({
               "version": "1.0",
               "response": {
