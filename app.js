@@ -545,8 +545,11 @@ app.post("/pet", requestVerifier, function(req, res) {
           });
         } else {
           if (doc.data().hasOwnProperty(req.body.request.intent.slots.name.value)) {
+
+            lastFeed = new Date(doc.data()[req.body.request.intent.slots.name.value].lastFed+'Z');
+            now = new Date();
+            console.log(now-lastFeed);
             updatePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
-            console.log(doc.data()[req.body.request.intent.slots.name.value].lastFed);
             res.json({
               "version": "1.0",
               "response": {
