@@ -548,7 +548,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 
             lastFeed = new Date(doc.data()[req.body.request.intent.slots.name.value].lastFed+'Z');
             now = new Date();
-            console.log((now-lastFeed)/360000);
+            console.log((now-lastFeed)/3600000);
             updatePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
             res.json({
               "version": "1.0",
