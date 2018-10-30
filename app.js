@@ -549,7 +549,7 @@ app.post("/pet", requestVerifier, function(req, res) {
             lastFeed = new Date(doc.data()[req.body.request.intent.slots.name.value].lastFed+'Z');
             now = new Date();
             var time = (now-lastFeed)/3600000;
-						if (req.body.request.intent.confirmationStatus != "NONE") {
+						if (req.body.request.intent.confirmationStatus == "NONE") {
 							if (time > 6) {
 								res.json({
 					        "version": "1.0",
