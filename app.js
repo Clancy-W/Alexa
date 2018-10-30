@@ -407,7 +407,38 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To find out how to add a pet ask, how do I add a pet? To find out how to delete a pet ask, how do I delete a pet? To find out how to feed a pet, ask how do I feed a pet?</speak>"
-        }
+        },
+				"directives": [
+		      {
+						"type": "Display.RenderTemplate",
+      			"template": {
+						  "type": "BodyTemplate6",
+						  "token": "ThisIsTheToken",
+						  "backButton": "HIDDEN",
+						  "textContent": {
+						    "primaryText": {
+							    "text": "Pet Feeder",
+							    "type": "PlainText"
+								},
+						    "secondaryText": {
+							    "text": "",
+							    "type": "PlainText"
+								},
+						    "tertiaryText": {
+							    "text": "",
+							    "type": "PlainText"
+								}
+							}
+						}
+		      },
+					{
+		        "type": "Hint",
+		        "hint": {
+		          "type": "PlainText",
+		          "text": "How do I feed a pet?"
+		        }
+		      }
+		    ]
       }
     });
   }
@@ -419,7 +450,38 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To add a pet, just tell Alexa to add a pet, come on, try it yourself!</speak>"
-        }
+        },
+				"directives": [
+		      {
+						"type": "Display.RenderTemplate",
+      			"template": {
+						  "type": "BodyTemplate6",
+						  "token": "ThisIsTheToken",
+						  "backButton": "HIDDEN",
+						  "textContent": {
+						    "primaryText": {
+							    "text": "Pet Feeder",
+							    "type": "PlainText"
+								},
+						    "secondaryText": {
+							    "text": "",
+							    "type": "PlainText"
+								},
+						    "tertiaryText": {
+							    "text": "",
+							    "type": "PlainText"
+								}
+							}
+						}
+		      },
+					{
+		        "type": "Hint",
+		        "hint": {
+		          "type": "PlainText",
+		          "text": "Add a pet."
+		        }
+		      }
+		    ]
       }
     });
   }
@@ -431,7 +493,38 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To delete a pet, just tell Alexa to delete a pet, come on, try it yourself!</speak>"
-        }
+        },
+				"directives": [
+		      {
+						"type": "Display.RenderTemplate",
+      			"template": {
+						  "type": "BodyTemplate6",
+						  "token": "ThisIsTheToken",
+						  "backButton": "HIDDEN",
+						  "textContent": {
+						    "primaryText": {
+							    "text": "Pet Feeder",
+							    "type": "PlainText"
+								},
+						    "secondaryText": {
+							    "text": "",
+							    "type": "PlainText"
+								},
+						    "tertiaryText": {
+							    "text": "",
+							    "type": "PlainText"
+								}
+							}
+						}
+		      },
+					{
+		        "type": "Hint",
+		        "hint": {
+		          "type": "PlainText",
+		          "text": "Delete a pet."
+		        }
+		      }
+		    ]
       }
     });
   }
@@ -443,7 +536,38 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To feed a pet, just tell Alexa to feed your pet, come on, try it yourself!</speak>"
-        }
+        },
+				"directives": [
+		      {
+						"type": "Display.RenderTemplate",
+      			"template": {
+						  "type": "BodyTemplate6",
+						  "token": "ThisIsTheToken",
+						  "backButton": "HIDDEN",
+						  "textContent": {
+						    "primaryText": {
+							    "text": "Pet Feeder",
+							    "type": "PlainText"
+								},
+						    "secondaryText": {
+							    "text": "",
+							    "type": "PlainText"
+								},
+						    "tertiaryText": {
+							    "text": "",
+							    "type": "PlainText"
+								}
+							}
+						}
+		      },
+					{
+		        "type": "Hint",
+		        "hint": {
+		          "type": "PlainText",
+		          "text": "Feed my pet."
+		        }
+		      }
+		    ]
       }
     });
   }
