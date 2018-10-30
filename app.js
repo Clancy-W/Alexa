@@ -369,8 +369,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 		      {
 					  "type": "BodyTemplate6",
 					  "token": "1",
-					  "backButton": "HIDDEN",
-					  "image": "Image",
+					  "backButton": "HIDDEN"
 					  "textContent": {
 					    "primaryText": {
 						    "text": "primaryText1",
