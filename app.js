@@ -570,7 +570,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 		                "shouldEndSession": true,
 		                "outputSpeech": {
 		                  "type": "SSML",
-		                  "ssml": "<speak>Yes, " + req.body.request.intent.slots.name.value + " has been fed.</speak>"
+		                  "ssml": "<speak>" + req.body.request.intent.slots.name.value + " has already been fed.</speak>"
 		                }
 		              }
 		            });
