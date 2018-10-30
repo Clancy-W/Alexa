@@ -367,25 +367,23 @@ app.post("/pet", requestVerifier, function(req, res) {
         },
 				"directives": [
 		      {
-						{
-						  "type": "BodyTemplate6",
-						  "token": "1",
-						  "backButton": "HIDDEN",
-						  "image": "Image",
-						  "textContent": {
-						    "primaryText": {
-							    "text": "primaryText1",
-							    "type": "PlainText"
-								},
-						    "secondaryText": {
-							    "text": "secondaryText",
-							    "type": "PlainText"
-								},
-						    "tertiaryText": {
-							    "text": "Tertiary text",
-							    "type": "PlainText"
-								},
-							}
+					  "type": "BodyTemplate6",
+					  "token": "1",
+					  "backButton": "HIDDEN",
+					  "image": "Image",
+					  "textContent": {
+					    "primaryText": {
+						    "text": "primaryText1",
+						    "type": "PlainText"
+							},
+					    "secondaryText": {
+						    "text": "secondaryText",
+						    "type": "PlainText"
+							},
+					    "tertiaryText": {
+						    "text": "Tertiary text",
+						    "type": "PlainText"
+							},
 						}
 		      }
 		    ]
