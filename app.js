@@ -449,7 +449,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>To add a pet, just tell Alexa to add a pet, come on, try it yourself!</speak>"
+          "ssml": "<speak>To add a pet, just say, Alexa, add a pet, come on, try it yourself!</speak>"
         },
 				"directives": [
 		      {
@@ -492,7 +492,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>To delete a pet, just tell Alexa to delete a pet, come on, try it yourself!</speak>"
+          "ssml": "<speak>To delete a pet, just say, Alexa, delete a pet, come on, try it yourself!</speak>"
         },
 				"directives": [
 		      {
@@ -535,7 +535,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>To feed a pet, just tell Alexa to feed your pet, come on, try it yourself!</speak>"
+          "ssml": "<speak>To feed a pet, just say, Alexa, feed my pet, come on, try it yourself!</speak>"
         },
 				"directives": [
 		      {
