@@ -548,18 +548,61 @@ app.post("/pet", requestVerifier, function(req, res) {
 
             lastFeed = new Date(doc.data()[req.body.request.intent.slots.name.value].lastFed+'Z');
             now = new Date();
-            console.log((now-lastFeed)/3600000);
-            updatePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
-            res.json({
-              "version": "1.0",
-              "response": {
-                "shouldEndSession": true,
-                "outputSpeech": {
-                  "type": "SSML",
-                  "ssml": "<speak>We fed your pet!</speak>"
-                }
-              }
-            });
+            var time = (now-lastFeed)/3600000;
+						if (req.body.request.intent.confirmationStatus == "NONE") {
+							if (time > 6) {
+								res.json({
+					        "version": "1.0",
+					        "response": {
+					          "directives": [
+					            {
+					              "type": "Dialog.Delegate",
+					              "updatedIntent": req.body.request.intent
+					            }
+					          ]
+					        }
+					      });
+							}
+							else {
+		            res.json({
+		              "version": "1.0",
+		              "response": {
+		                "shouldEndSession": true,
+		                "outputSpeech": {
+		                  "type": "SSML",
+		                  "ssml": "<speak>Yes, " + req.body.request.intent.slots.name.value + " has been fed.</speak>"
+		                }
+		              }
+		            });
+							}
+						}
+						else {
+							if (req.body.request.intent.confirmationStatus == "CONFIRMED") {
+	            	updatePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
+		            res.json({
+		              "version": "1.0",
+		              "response": {
+		                "shouldEndSession": true,
+		                "outputSpeech": {
+		                  "type": "SSML",
+		                  "ssml": "<speak>Ok, We fed  " + req.body.request.intent.slots.name.value + "!</speak>"
+		                }
+		              }
+		            });
+							}
+							else {
+		            res.json({
+		              "version": "1.0",
+		              "response": {
+		                "shouldEndSession": true,
+		                "outputSpeech": {
+		                  "type": "SSML",
+		                  "ssml": "<speak>Ok, We did not feed  " + req.body.request.intent.slots.name.value + ".</speak>"
+		                }
+		              }
+		            });
+							}
+						}
           }
           else {
             res.json({
