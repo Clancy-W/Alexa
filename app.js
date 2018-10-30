@@ -367,21 +367,24 @@ app.post("/pet", requestVerifier, function(req, res) {
         },
 				"directives": [
 		      {
-					  "type": "BodyTemplate6",
-					  "token": "1",
-					  "backButton": "HIDDEN",
-					  "textContent": {
-					    "primaryText": {
-						    "text": "primaryText1",
-						    "type": "PlainText"
-							},
-					    "secondaryText": {
-						    "text": "secondaryText",
-						    "type": "PlainText"
-							},
-					    "tertiaryText": {
-						    "text": "Tertiary text",
-						    "type": "PlainText"
+						"type": "Display.RenderTemplate",
+      			"template": {
+						  "type": "BodyTemplate6",
+						  "token": "ThisIsTheToken",
+						  "backButton": "HIDDEN",
+						  "textContent": {
+						    "primaryText": {
+							    "text": "primaryText1",
+							    "type": "PlainText"
+								},
+						    "secondaryText": {
+							    "text": "secondaryText",
+							    "type": "PlainText"
+								},
+						    "tertiaryText": {
+							    "text": "Tertiary text",
+							    "type": "PlainText"
+								}
 							}
 						}
 		      }
