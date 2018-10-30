@@ -374,19 +374,26 @@ app.post("/pet", requestVerifier, function(req, res) {
 						  "backButton": "HIDDEN",
 						  "textContent": {
 						    "primaryText": {
-							    "text": "primaryText1",
+							    "text": "Welcome to Pet Feeder!",
 							    "type": "PlainText"
 								},
 						    "secondaryText": {
-							    "text": "secondaryText",
+							    "text": "",
 							    "type": "PlainText"
 								},
 						    "tertiaryText": {
-							    "text": "Tertiary text",
+							    "text": "",
 							    "type": "PlainText"
 								}
 							}
 						}
+		      },
+					{
+		        "type": "Hint",
+		        "hint": {
+		          "type": "PlainText",
+		          "text": "Try saying \"Help\"."
+		        }
 		      }
 		    ]
       }
