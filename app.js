@@ -392,7 +392,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 		        "type": "Hint",
 		        "hint": {
 		          "type": "PlainText",
-		          "text": "Try saying \"Help\"."
+		          "text": "Help."
 		        }
 		      }
 		    ]
