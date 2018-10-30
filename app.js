@@ -364,7 +364,31 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>Welcome to Pet Feeder, we help you remember to feed your pets, for information about what we can do, just say help.</speak>"
-        }
+        },
+				"directives": [
+		      {
+						{
+						  "type": "BodyTemplate6",
+						  "token": "1",
+						  "backButton": "HIDDEN",
+						  "image": "Image",
+						  "textContent": {
+						    "primaryText": {
+							    "text": "primaryText1",
+							    "type": "PlainText"
+								},
+						    "secondaryText": {
+							    "text": "secondaryText",
+							    "type": "PlainText"
+								},
+						    "tertiaryText": {
+							    "text": "Tertiary text",
+							    "type": "PlainText"
+								},
+							}
+						}
+		      }
+		    ]
       }
     });
   }
