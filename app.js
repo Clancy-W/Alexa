@@ -571,8 +571,9 @@ app.post("/pet", requestVerifier, function(req, res) {
       }
     });
   }
-  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddPet'){
+  else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddPet') {
     if (!req.body.request.intent.slots.pet || !req.body.request.intent.slots.pet.value) {
+			console.log("HERE!");
 			res.json({
         "version": "1.0",
         "response": {
@@ -580,27 +581,7 @@ app.post("/pet", requestVerifier, function(req, res) {
             {
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-						{
-						  "type":"BodyTemplate1",
-						  "token": "ThisIsTheToken6",
-						  "backButton": "HIDDEN",
-						  "title": "Pet Feeder",
-						  "textContent": {
-						    "primaryText": {
-							    "text": "What type of animal is your pet?",
-							    "type": "PlainText"
-								},
-						    "secondaryText": {
-							    "text": "",
-							    "type": "PlainText"
-								},
-						    "tertiaryText": {
-							    "text": "",
-							    "type": "PlainText"
-								}
-							}
-						}
+            }
           ]
         }
       });
@@ -613,27 +594,7 @@ app.post("/pet", requestVerifier, function(req, res) {
             {
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-						{
-						  "type":"BodyTemplate1",
-						  "token": "ThisIsTheToken5",
-						  "backButton": "HIDDEN",
-						  "title": "Pet Feeder",
-						  "textContent": {
-						    "primaryText": {
-							    "text": "What's your pets name?",
-							    "type": "PlainText"
-								},
-						    "secondaryText": {
-							    "text": "",
-							    "type": "PlainText"
-								},
-						    "tertiaryText": {
-							    "text": "",
-							    "type": "PlainText"
-								}
-							}
-						}
+            }
           ]
         }
       });
@@ -646,27 +607,7 @@ app.post("/pet", requestVerifier, function(req, res) {
             {
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-						{
-						  "type":"BodyTemplate1",
-						  "token": "ThisIsTheToken7",
-						  "backButton": "HIDDEN",
-						  "title": "Pet Feeder",
-						  "textContent": {
-						    "primaryText": {
-							    "text": "Are you sure?",
-							    "type": "PlainText"
-								},
-						    "secondaryText": {
-							    "text": "",
-							    "type": "PlainText"
-								},
-						    "tertiaryText": {
-							    "text": "",
-							    "type": "PlainText"
-								}
-							}
-						}
+            }
           ]
         }
       });
@@ -737,27 +678,7 @@ app.post("/pet", requestVerifier, function(req, res) {
             {
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-						{
-						  "type":"BodyTemplate1",
-						  "token": "ThisIsTheToken5",
-						  "backButton": "HIDDEN",
-						  "title": "Pet Feeder",
-						  "textContent": {
-						    "primaryText": {
-							    "text": "What's your pets name?",
-							    "type": "PlainText"
-								},
-						    "secondaryText": {
-							    "text": "",
-							    "type": "PlainText"
-								},
-						    "tertiaryText": {
-							    "text": "",
-							    "type": "PlainText"
-								}
-							}
-						}
+            }
           ]
         }
       });
@@ -871,27 +792,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 					            {
 					              "type": "Dialog.Delegate",
 					              "updatedIntent": req.body.request.intent
-					            },
-											{
-											  "type":"BodyTemplate1",
-											  "token": "ThisIsTheToken5",
-											  "backButton": "HIDDEN",
-											  "title": "Pet Feeder",
-											  "textContent": {
-											    "primaryText": {
-												    "text": "Would you like to feed"+ req.body.request.intent.slots.name.value +"?",
-												    "type": "PlainText"
-													},
-											    "secondaryText": {
-												    "text": "",
-												    "type": "PlainText"
-													},
-											    "tertiaryText": {
-												    "text": "",
-												    "type": "PlainText"
-													}
-												}
-											}
+					            }
 					          ]
 					        }
 					      });
