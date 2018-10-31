@@ -662,24 +662,25 @@ app.post("/pet", requestVerifier, function(req, res) {
             "ssml": "<speak>We cancelled it, try asking again!</speak>"
           },
           "directives": [{
-            "type": "Display.RenderTemplate",
-            "template": {
-              "type": "BodyTemplate1",
-              "token": "ThisIsTheToken8",
-              "backButton": "HIDDEN",
-              "title": "Pet Feeder",
-              "textContent": {
-                "primaryText": {
-                  "text": "Try Again.",
-                  "type": "PlainText"
-                },
-                "secondaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                },
-                "tertiaryText": {
-                  "text": "",
-                  "type": "PlainText"
+              "type": "Display.RenderTemplate",
+              "template": {
+                "type": "BodyTemplate1",
+                "token": "ThisIsTheToken8",
+                "backButton": "HIDDEN",
+                "title": "Pet Feeder",
+                "textContent": {
+                  "primaryText": {
+                    "text": "Try Again.",
+                    "type": "PlainText"
+                  },
+                  "secondaryText": {
+                    "text": "",
+                    "type": "PlainText"
+                  },
+                  "tertiaryText": {
+                    "text": "",
+                    "type": "PlainText"
+                  }
                 }
               }
             },
@@ -690,7 +691,7 @@ app.post("/pet", requestVerifier, function(req, res) {
                 "text": "Add a pet."
               }
             }
-          }]
+          ]
         }
       });
     } else {
@@ -807,24 +808,25 @@ app.post("/pet", requestVerifier, function(req, res) {
                   "ssml": "<speak>We couldn't find a pet with that name, try asking again!</speak>"
                 },
                 "directives": [{
-                  "type": "Display.RenderTemplate",
-                  "template": {
-                    "type": "BodyTemplate1",
-                    "token": "ThisIsTheToken9",
-                    "backButton": "HIDDEN",
-                    "title": "Pet Feeder",
-                    "textContent": {
-                      "primaryText": {
-                        "text": "Try Again.",
-                        "type": "PlainText"
-                      },
-                      "secondaryText": {
-                        "text": "",
-                        "type": "PlainText"
-                      },
-                      "tertiaryText": {
-                        "text": "",
-                        "type": "PlainText"
+                    "type": "Display.RenderTemplate",
+                    "template": {
+                      "type": "BodyTemplate1",
+                      "token": "ThisIsTheToken9",
+                      "backButton": "HIDDEN",
+                      "title": "Pet Feeder",
+                      "textContent": {
+                        "primaryText": {
+                          "text": "Try Again.",
+                          "type": "PlainText"
+                        },
+                        "secondaryText": {
+                          "text": "",
+                          "type": "PlainText"
+                        },
+                        "tertiaryText": {
+                          "text": "",
+                          "type": "PlainText"
+                        }
                       }
                     }
                   },
@@ -835,7 +837,7 @@ app.post("/pet", requestVerifier, function(req, res) {
                       "text": "Feed my pet."
                     }
                   }
-                }]
+                ]
               }
             });
           } else {
@@ -927,24 +929,25 @@ app.post("/pet", requestVerifier, function(req, res) {
                     "ssml": "<speak>We couldn't find a pet with that name, try again.</speak>"
                   },
                   "directives": [{
-                    "type": "Display.RenderTemplate",
-                    "template": {
-                      "type": "BodyTemplate1",
-                      "token": "ThisIsTheToken11",
-                      "backButton": "HIDDEN",
-                      "title": "Pet Feeder",
-                      "textContent": {
-                        "primaryText": {
-                          "text": "Try Again.",
-                          "type": "PlainText"
-                        },
-                        "secondaryText": {
-                          "text": "",
-                          "type": "PlainText"
-                        },
-                        "tertiaryText": {
-                          "text": "",
-                          "type": "PlainText"
+                      "type": "Display.RenderTemplate",
+                      "template": {
+                        "type": "BodyTemplate1",
+                        "token": "ThisIsTheToken11",
+                        "backButton": "HIDDEN",
+                        "title": "Pet Feeder",
+                        "textContent": {
+                          "primaryText": {
+                            "text": "Try Again.",
+                            "type": "PlainText"
+                          },
+                          "secondaryText": {
+                            "text": "",
+                            "type": "PlainText"
+                          },
+                          "tertiaryText": {
+                            "text": "",
+                            "type": "PlainText"
+                          }
                         }
                       }
                     },
@@ -955,7 +958,7 @@ app.post("/pet", requestVerifier, function(req, res) {
                         "text": "Feed my pet."
                       }
                     }
-                  }]
+                  ]
                 }
               });
             }
