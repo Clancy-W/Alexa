@@ -586,7 +586,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						  "token": "ThisIsTheToken6",
 						  "backButton": "HIDDEN",
 						  "title": "Pet Feeder",
-						  "textContent": "textContent": {
+						  "textContent": {
 						    "primaryText": {
 							    "text": "What type of animal is your pet?",
 							    "type": "PlainText"
@@ -619,7 +619,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						  "token": "ThisIsTheToken5",
 						  "backButton": "HIDDEN",
 						  "title": "Pet Feeder",
-						  "textContent": "textContent": {
+						  "textContent": {
 						    "primaryText": {
 							    "text": "What's your pets name?",
 							    "type": "PlainText"
@@ -652,7 +652,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						  "token": "ThisIsTheToken7",
 						  "backButton": "HIDDEN",
 						  "title": "Pet Feeder",
-						  "textContent": "textContent": {
+						  "textContent": {
 						    "primaryText": {
 							    "text": "Are you sure?",
 							    "type": "PlainText"
@@ -686,7 +686,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						  "token": "ThisIsTheToken8",
 						  "backButton": "HIDDEN",
 						  "title": "Pet Feeder",
-						  "textContent": "textContent": {
+						  "textContent": {
 						    "primaryText": {
 							    "text": "Try Again.",
 							    "type": "PlainText"
@@ -743,7 +743,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						  "token": "ThisIsTheToken5",
 						  "backButton": "HIDDEN",
 						  "title": "Pet Feeder",
-						  "textContent": "textContent": {
+						  "textContent": {
 						    "primaryText": {
 							    "text": "What's your pets name?",
 							    "type": "PlainText"
@@ -793,7 +793,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						  "token": "ThisIsTheToken5",
 						  "backButton": "HIDDEN",
 						  "title": "Pet Feeder",
-						  "textContent": "textContent": {
+						  "textContent": {
 						    "primaryText": {
 							    "text": "What's your pets name?",
 							    "type": "PlainText"
@@ -831,7 +831,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 								  "token": "ThisIsTheToken9",
 								  "backButton": "HIDDEN",
 								  "title": "Pet Feeder",
-								  "textContent": "textContent": {
+								  "textContent": {
 								    "primaryText": {
 									    "text": "Try Again.",
 									    "type": "PlainText"
@@ -877,7 +877,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 											  "token": "ThisIsTheToken5",
 											  "backButton": "HIDDEN",
 											  "title": "Pet Feeder",
-											  "textContent": "textContent": {
+											  "textContent": {
 											    "primaryText": {
 												    "text": "Would you like to feed"+ req.body.request.intent.slots.name.value +"?",
 												    "type": "PlainText"
@@ -952,7 +952,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 									  "token": "ThisIsTheToken11",
 									  "backButton": "HIDDEN",
 									  "title": "Pet Feeder",
-									  "textContent": "textContent": {
+									  "textContent": {
 									    "primaryText": {
 										    "text": "Try Again.",
 										    "type": "PlainText"
