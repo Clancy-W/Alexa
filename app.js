@@ -557,29 +557,6 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-            {
-              "type": "Display.RenderTemplate",
-              "template": {
-                "type": "BodyTemplate1",
-                "token": "ThisIsTheToken6",
-                "backButton": "HIDDEN",
-                "title": "Pet Feeder",
-                "textContent": {
-                  "primaryText": {
-                    "text": "What type of animal is your pet?",
-                    "type": "PlainText"
-                  },
-                  "secondaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  },
-                  "tertiaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  }
-                }
-              }
             }
           ]
         }
@@ -591,29 +568,6 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-            {
-              "type": "Display.RenderTemplate",
-              "template": {
-                "type": "BodyTemplate1",
-                "token": "ThisIsTheToken5",
-                "backButton": "HIDDEN",
-                "title": "Pet Feeder",
-                "textContent": {
-                  "primaryText": {
-                    "text": "What's your pets name?",
-                    "type": "PlainText"
-                  },
-                  "secondaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  },
-                  "tertiaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  }
-                }
-              }
             }
           ]
         }
@@ -625,29 +579,6 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-            {
-              "type": "Display.RenderTemplate",
-              "template": {
-                "type": "BodyTemplate1",
-                "token": "ThisIsTheToken7",
-                "backButton": "HIDDEN",
-                "title": "Pet Feeder",
-                "textContent": {
-                  "primaryText": {
-                    "text": "Are you sure?",
-                    "type": "PlainText"
-                  },
-                  "secondaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  },
-                  "tertiaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  }
-                }
-              }
             }
           ]
         }
@@ -717,29 +648,6 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-            {
-              "type": "Display.RenderTemplate",
-              "template": {
-                "type": "BodyTemplate1",
-                "token": "ThisIsTheToken5",
-                "backButton": "HIDDEN",
-                "title": "Pet Feeder",
-                "textContent": {
-                  "primaryText": {
-                    "text": "What's your pets name?",
-                    "type": "PlainText"
-                  },
-                  "secondaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  },
-                  "tertiaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  }
-                }
-              }
             }
           ]
         }
@@ -767,29 +675,6 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            },
-            {
-              "type": "Display.RenderTemplate",
-              "template": {
-                "type": "BodyTemplate1",
-                "token": "ThisIsTheToken5",
-                "backButton": "HIDDEN",
-                "title": "Pet Feeder",
-                "textContent": {
-                  "primaryText": {
-                    "text": "What's your pets name?",
-                    "type": "PlainText"
-                  },
-                  "secondaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  },
-                  "tertiaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  }
-                }
-              }
             }
           ]
         }
@@ -854,29 +739,6 @@ app.post("/pet", requestVerifier, function(req, res) {
                       "directives": [{
                           "type": "Dialog.Delegate",
                           "updatedIntent": req.body.request.intent
-                        },
-                        {
-                          "type": "Display.RenderTemplate",
-                          "template": {
-                            "type": "BodyTemplate1",
-                            "token": "ThisIsTheToken5",
-                            "backButton": "HIDDEN",
-                            "title": "Pet Feeder",
-                            "textContent": {
-                              "primaryText": {
-                                "text": "Would you like to feed" + req.body.request.intent.slots.name.value + "?",
-                                "type": "PlainText"
-                              },
-                              "secondaryText": {
-                                "text": "",
-                                "type": "PlainText"
-                              },
-                              "tertiaryText": {
-                                "text": "",
-                                "type": "PlainText"
-                              }
-                            }
-                          }
                         }
                       ]
                     }
