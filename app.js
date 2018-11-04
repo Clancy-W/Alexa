@@ -695,7 +695,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 			temp = [];
 			for (i in dat) {
 				var keye = "dog"
-				if (dat[i].type in obj) {
+				if (dat[i].type in animals) {
 					keye = dat[i].type;
 				}
 				temp.push(JSON.parse('{"listItemIdentifier":"brie","ordinalNumber":1,"textContent":{"primaryText":{"type":"PlainText","text":"' + dat[i].name + '"}},"image":{"contentDescription":null,"smallSourceUrl":null,"largeSourceUrl":null,"sources":[{"url":"' + animals[keye] + '","size":"small","widthPixels":0,"heightPixels":0},{"url":"' + animals[keye] + '","size":"large","widthPixels":0,"heightPixels":0}]},"token":"' + dat[i].name + '"}'));
