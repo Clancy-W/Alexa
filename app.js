@@ -693,7 +693,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 		db.collection('users').doc(req.body.session.user.userId).get().then(doc => {
 			dat = doc.data();
 			temp = [];
-			for (i in a) {
+			for (i in dat) {
 				var keye = "dog"
 				if (dat[i].type in obj) {
 					keye = dat[i].type;
