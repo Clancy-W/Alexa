@@ -690,24 +690,25 @@ app.post("/pet", requestVerifier, function(req, res) {
 			jsonexample.dataSources.listTemplate2ListData.listPage.listItems = [
 				temp
 			]
+			res.json({
+	      "version": "1.0",
+	      "response": {
+	        "shouldEndSession": false,
+	        "outputSpeech": {
+	          "type": "SSML",
+	          "ssml": "<speak>Welcome to Pet Feeder, we help you remember to feed your pets, for information about what we can do, just say help.</speak>"
+	        },
+	        "directives": [{
+	            "type": "Alexa.Presentation.APL.RenderDocument",
+	            "document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+	          }
+	        ]
+	      }
+	    });
 		});
-    res.json({
-      "version": "1.0",
-      "response": {
-        "shouldEndSession": false,
-        "outputSpeech": {
-          "type": "SSML",
-          "ssml": "<speak>Welcome to Pet Feeder, we help you remember to feed your pets, for information about what we can do, just say help.</speak>"
-        },
-        "directives": [{
-            "type": "Alexa.Presentation.APL.RenderDocument",
-            "document": jsonexample.document,
-						"datasources": jsonexample.dataSources,
-						"token": "123"
-          }
-        ]
-      }
-    });
+
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AMAZON.HelpIntent') {
     res.json({
       "version": "1.0",
