@@ -753,7 +753,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         "directives": [{
             "type": "Alexa.Presentation.APL.RenderDocument",
             "document": jsonexample.document,
-						"dataSources": jsonexample.dataSources,
+						"datasources": jsonexample.dataSources,
 						"token": "123"
           }
         ]
