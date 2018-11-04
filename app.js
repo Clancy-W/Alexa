@@ -742,7 +742,9 @@ app.post('/steam', requestVerifier, function(req, res) {
 });
 app.post("/pet", requestVerifier, function(req, res) {
   if (req.body.request.type === 'LaunchRequest') {
-		console.log(db.collection('users').doc(req.body.session.user.userId).get());
+		db.collection('users').doc(req.body.session.user.userId).get().then(doc => {
+			console.log(doc.data());
+		});
     res.json({
       "version": "1.0",
       "response": {
