@@ -683,11 +683,12 @@ app.post("/pet", requestVerifier, function(req, res) {
 		            }
 		        }
 		    }
-		}
+		};
 		db.collection('users').doc(req.body.session.user.userId).get().then(doc => {
 			dat = doc.data();
+			temp = JSON.parse('{"listItemIdentifier":"brie","ordinalNumber":1,"textContent":{"primaryText":{"type":"PlainText","text":"' + dat[Object.keys(dat)[0]].name + '"}},"image":{"contentDescription":null,"smallSourceUrl":null,"largeSourceUrl":null,"sources":[{"url":"https://i.imgur.com/GcMKgWB.png","size":"small","widthPixels":0,"heightPixels":0},{"url":"https://i.imgur.com/GcMKgWB.png","size":"large","widthPixels":0,"heightPixels":0}]},"token":"brie"}');
 			jsonexample.dataSources.listTemplate2ListData.listPage.listItems = [
-				JSON.parse('{"listItemIdentifier":"brie","ordinalNumber":1,"textContent":{"primaryText":{"type":"PlainText","text":"' + dat[Object.keys(dat)[0]].name + '"}},"image":{"contentDescription":null,"smallSourceUrl":null,"largeSourceUrl":null,"sources":[{"url":"https://i.imgur.com/GcMKgWB.png","size":"small","widthPixels":0,"heightPixels":0},{"url":"https://i.imgur.com/GcMKgWB.png","size":"large","widthPixels":0,"heightPixels":0}]},"token":"brie"}');
+				temp
 			]
 		});
     res.json({
