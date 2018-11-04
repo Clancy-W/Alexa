@@ -13,7 +13,13 @@ var db = admin.firestore();
 
 
 
-
+var animals = {
+	"dog": "https://i.imgur.com/Ay7cO31.png",
+	"cat": "https://i.imgur.com/6oxYmhg.png",
+	"bird": "https://i.imgur.com/nutcG2u.png",
+	"fish": "https://i.imgur.com/FDZryFy.png",
+	"hamster": "https://i.imgur.com/GcMKgWB.png"
+}
 
 let alexaVerifier = require('alexa-verifier'); // at the top of our file
 var obj = require("./inspiration.json")
@@ -686,10 +692,16 @@ app.post("/pet", requestVerifier, function(req, res) {
 		};
 		db.collection('users').doc(req.body.session.user.userId).get().then(doc => {
 			dat = doc.data();
-			temp = JSON.parse('{"listItemIdentifier":"brie","ordinalNumber":1,"textContent":{"primaryText":{"type":"PlainText","text":"' + dat[Object.keys(dat)[0]].name + '"}},"image":{"contentDescription":null,"smallSourceUrl":null,"largeSourceUrl":null,"sources":[{"url":"https://i.imgur.com/GcMKgWB.png","size":"small","widthPixels":0,"heightPixels":0},{"url":"https://i.imgur.com/GcMKgWB.png","size":"large","widthPixels":0,"heightPixels":0}]},"token":"brie"}');
-			jsonexample.dataSources.listTemplate2ListData.listPage.listItems = [
-				temp
-			]
+			temp = [];
+			for (i in a) {
+				var keye = "dog"
+				if (dat[i].type in obj) {
+					keye = dat[i].type;
+				}
+				temp.push(JSON.parse('{"listItemIdentifier":"brie","ordinalNumber":1,"textContent":{"primaryText":{"type":"PlainText","text":"' + dat[i].name + '"}},"image":{"contentDescription":null,"smallSourceUrl":null,"largeSourceUrl":null,"sources":[{"url":"' + animals[keye] + '","size":"small","widthPixels":0,"heightPixels":0},{"url":"' + animals[keye] + '","size":"large","widthPixels":0,"heightPixels":0}]},"token":"' + dat[i].name + '"}'));
+			}
+
+			jsonexample.dataSources.listTemplate2ListData.listPage.listItems = temp;
 			res.json({
 	      "version": "1.0",
 	      "response": {
