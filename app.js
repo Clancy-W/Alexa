@@ -1007,7 +1007,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 					});
 				}
 			});
-	} else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === "HasBeenFed") {
+	} else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === "WhoNeedsFeeding") {
 		var cityRef = db.collection('users').doc(req.body.session.user.userId);
 		var getDoc = cityRef.get()
 			.then(doc => {
