@@ -948,7 +948,7 @@ app.post("/pet", requestVerifier, function(req, res) {
               });
             }
           }
-        })
+        });
     }
 
   } else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === "FeedAll") {
@@ -1006,8 +1006,8 @@ app.post("/pet", requestVerifier, function(req, res) {
 						}
 					});
 				}
-			})
+			});
 	}
 
-})
+});
 app.listen(app.get("port"));
