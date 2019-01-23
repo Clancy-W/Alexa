@@ -729,37 +729,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To find out how to add a pet ask, how do I add a pet? To find out how to delete a pet ask, how do I delete a pet? To find out how to feed a pet, ask how do I feed a pet?</speak>"
-        },
-        "directives": [{
-            "type": "Display.RenderTemplate",
-            "document": {
-              "type": "BodyTemplate6",
-              "token": "ThisIsTheToken1",
-              "backButton": "HIDDEN",
-              "textContent": {
-                "primaryText": {
-                  "text": "Pet Feeder",
-                  "type": "PlainText"
-                },
-                "secondaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                },
-                "tertiaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                }
-              }
-            }
-          },
-          {
-            "type": "Hint",
-            "hint": {
-              "type": "PlainText",
-              "text": "How do I feed a pet?"
-            }
-          }
-        ]
+        }
       }
     });
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddHelp') {
@@ -770,37 +740,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To add a pet, just say, Alexa, add a pet, come on, try it yourself!</speak>"
-        },
-        "directives": [{
-            "type": "Display.RenderTemplate",
-            "template": {
-              "type": "BodyTemplate6",
-              "token": "ThisIsTheToken2",
-              "backButton": "HIDDEN",
-              "textContent": {
-                "primaryText": {
-                  "text": "Pet Feeder",
-                  "type": "PlainText"
-                },
-                "secondaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                },
-                "tertiaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                }
-              }
-            }
-          },
-          {
-            "type": "Hint",
-            "hint": {
-              "type": "PlainText",
-              "text": "Add a pet."
-            }
-          }
-        ]
+        }
       }
     });
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'DeleteHelp') {
@@ -811,37 +751,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To delete a pet, just say, Alexa, delete a pet, come on, try it yourself!</speak>"
-        },
-        "directives": [{
-            "type": "Display.RenderTemplate",
-            "template": {
-              "type": "BodyTemplate6",
-              "token": "ThisIsTheToken3",
-              "backButton": "HIDDEN",
-              "textContent": {
-                "primaryText": {
-                  "text": "Pet Feeder",
-                  "type": "PlainText"
-                },
-                "secondaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                },
-                "tertiaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                }
-              }
-            }
-          },
-          {
-            "type": "Hint",
-            "hint": {
-              "type": "PlainText",
-              "text": "Delete a pet."
-            }
-          }
-        ]
+        }
       }
     });
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FeedHelp') {
@@ -852,37 +762,7 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To feed a pet, just say, Alexa, has my pet been fed, come on, try it yourself!</speak>"
-        },
-        "directives": [{
-            "type": "Display.RenderTemplate",
-            "template": {
-              "type": "BodyTemplate6",
-              "token": "ThisIsTheToken4",
-              "backButton": "HIDDEN",
-              "textContent": {
-                "primaryText": {
-                  "text": "Pet Feeder",
-                  "type": "PlainText"
-                },
-                "secondaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                },
-                "tertiaryText": {
-                  "text": "",
-                  "type": "PlainText"
-                }
-              }
-            }
-          },
-          {
-            "type": "Hint",
-            "hint": {
-              "type": "PlainText",
-              "text": "Has my pet been fed."
-            }
-          }
-        ]
+        }
       }
     });
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddPet') {
@@ -927,38 +807,7 @@ app.post("/pet", requestVerifier, function(req, res) {
           "outputSpeech": {
             "type": "SSML",
             "ssml": "<speak>We cancelled it, try asking again!</speak>"
-          },
-          "directives": [{
-              "type": "Display.RenderTemplate",
-              "template": {
-                "type": "BodyTemplate1",
-                "token": "ThisIsTheToken8",
-                "backButton": "HIDDEN",
-                "title": "Pet Feeder",
-                "textContent": {
-                  "primaryText": {
-                    "text": "Try Again.",
-                    "type": "PlainText"
-                  },
-                  "secondaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  },
-                  "tertiaryText": {
-                    "text": "",
-                    "type": "PlainText"
-                  }
-                }
-              }
-            },
-            {
-              "type": "Hint",
-              "hint": {
-                "type": "PlainText",
-                "text": "Add a pet."
-              }
-            }
-          ]
+          }
         }
       });
     } else {
@@ -1027,38 +876,7 @@ app.post("/pet", requestVerifier, function(req, res) {
                 "outputSpeech": {
                   "type": "SSML",
                   "ssml": "<speak>We couldn't find a pet with that name, try asking again!</speak>"
-                },
-                "directives": [{
-                    "type": "Display.RenderTemplate",
-                    "template": {
-                      "type": "BodyTemplate1",
-                      "token": "ThisIsTheToken9",
-                      "backButton": "HIDDEN",
-                      "title": "Pet Feeder",
-                      "textContent": {
-                        "primaryText": {
-                          "text": "Try Again.",
-                          "type": "PlainText"
-                        },
-                        "secondaryText": {
-                          "text": "",
-                          "type": "PlainText"
-                        },
-                        "tertiaryText": {
-                          "text": "",
-                          "type": "PlainText"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "type": "Hint",
-                    "hint": {
-                      "type": "PlainText",
-                      "text": "Feed my pet."
-                    }
-                  }
-                ]
+                }
               }
             });
           } else {
@@ -1125,38 +943,7 @@ app.post("/pet", requestVerifier, function(req, res) {
                   "outputSpeech": {
                     "type": "SSML",
                     "ssml": "<speak>We couldn't find a pet with that name, try again.</speak>"
-                  },
-                  "directives": [{
-                      "type": "Display.RenderTemplate",
-                      "template": {
-                        "type": "BodyTemplate1",
-                        "token": "ThisIsTheToken11",
-                        "backButton": "HIDDEN",
-                        "title": "Pet Feeder",
-                        "textContent": {
-                          "primaryText": {
-                            "text": "Try Again.",
-                            "type": "PlainText"
-                          },
-                          "secondaryText": {
-                            "text": "",
-                            "type": "PlainText"
-                          },
-                          "tertiaryText": {
-                            "text": "",
-                            "type": "PlainText"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "Hint",
-                      "hint": {
-                        "type": "PlainText",
-                        "text": "Feed my pet."
-                      }
-                    }
-                  ]
+                  }
                 }
               });
             }
@@ -1164,6 +951,65 @@ app.post("/pet", requestVerifier, function(req, res) {
         })
     }
 
-  }
+  } else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === "FeedAll") {
+		var cityRef = db.collection('users').doc(req.body.session.user.userId);
+		var getDoc = cityRef.get()
+			.then(doc => {
+				if (!doc.exists) {
+					res.json({
+						"version": "1.0",
+						"response": {
+							"shouldEndSession": false,
+							"outputSpeech": {
+								"type": "SSML",
+								"ssml": "<speak>You don't seem to have any pets, to add one, just say add a pet.</speak>"
+							}
+						}
+					});
+				} else {
+					if (req.body.request.intent.confirmationStatus == "NONE") {
+
+						res.json({
+							"version": "1.0",
+							"response": {
+								"directives": [{
+										"type": "Dialog.Delegate",
+										"updatedIntent": req.body.request.intent
+									}
+								]
+							}
+						});
+
+					} else if (req.body.request.intent.confirmationStatus == "CONFIRMED") {
+
+						res.json({
+							"version": "1.0",
+							"response": {
+								"shouldEndSession": true,
+								"outputSpeech": {
+									"type": "SSML",
+									"ssml": "<speak>Ok, We fed  all of your pets.</speak>"
+								}
+							}
+						});
+						for (i in doc.data()) {
+							updatePet(req.body.session.user.userId, i);
+						}
+					} else {
+						res.json({
+							"version": "1.0",
+							"response": {
+								"shouldEndSession": true,
+								"outputSpeech": {
+									"type": "SSML",
+									"ssml": "<speak>Ok, We did not feed  all of your pets.</speak>"
+								}
+							}
+						});
+					}
+				}
+			})
+	}
+
 })
 app.listen(app.get("port"));
