@@ -966,47 +966,45 @@ app.post("/pet", requestVerifier, function(req, res) {
 							}
 						}
 					});
-				} else {
-					if (req.body.request.intent.confirmationStatus == "NONE") {
+				} else if (req.body.request.intent.confirmationStatus == "NONE") {
 
-						res.json({
-							"version": "1.0",
-							"response": {
-								"directives": [{
-										"type": "Dialog.Delegate",
-										"updatedIntent": req.body.request.intent
-									}
-								]
-							}
-						});
-
-					} else if (req.body.request.intent.confirmationStatus == "CONFIRMED") {
-
-						res.json({
-							"version": "1.0",
-							"response": {
-								"shouldEndSession": true,
-								"outputSpeech": {
-									"type": "SSML",
-									"ssml": "<speak>Ok, We fed  all of your pets.</speak>"
+					res.json({
+						"version": "1.0",
+						"response": {
+							"directives": [{
+									"type": "Dialog.Delegate",
+									"updatedIntent": req.body.request.intent
 								}
-							}
-						});
-						for (i in doc.data()) {
-							updatePet(req.body.session.user.userId, i);
+							]
 						}
-					} else {
-						res.json({
-							"version": "1.0",
-							"response": {
-								"shouldEndSession": true,
-								"outputSpeech": {
-									"type": "SSML",
-									"ssml": "<speak>Ok, We did not feed  all of your pets.</speak>"
-								}
+					});
+
+				} else if (req.body.request.intent.confirmationStatus == "CONFIRMED") {
+
+					res.json({
+						"version": "1.0",
+						"response": {
+							"shouldEndSession": true,
+							"outputSpeech": {
+								"type": "SSML",
+								"ssml": "<speak>Ok, We fed  all of your pets.</speak>"
 							}
-						});
+						}
+					});
+					for (var i in doc.data()) {
+						updatePet(req.body.session.user.userId, i);
 					}
+				} else {
+					res.json({
+						"version": "1.0",
+						"response": {
+							"shouldEndSession": true,
+							"outputSpeech": {
+								"type": "SSML",
+								"ssml": "<speak>Ok, We did not feed  all of your pets.</speak>"
+							}
+						}
+					});
 				}
 			})
 	}
