@@ -1007,6 +1007,71 @@ app.post("/pet", requestVerifier, function(req, res) {
 					});
 				}
 			});
+	} else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === "HasBeenFed") {
+		var cityRef = db.collection('users').doc(req.body.session.user.userId);
+		var getDoc = cityRef.get()
+			.then(doc => {
+				if (!doc.exists) {
+					res.json({
+						"version": "1.0",
+						"response": {
+							"shouldEndSession": false,
+							"outputSpeech": {
+								"type": "SSML",
+								"ssml": "<speak>You don't seem to have any pets, to add one, just say add a pet.</speak>"
+							}
+						}
+					});
+				} else {
+					now = new Date();
+					unfed = [];
+					for (var i in doc.data()) {
+						lastFeed = new Date(doc.data()[i].lastFed + 'Z');
+						var time = (now - lastFeed) / 3600000;
+						if (time > 6) {
+							unfed.push(i);
+						}
+					}
+					if (unfed.length > 1) {
+						res.json({
+							"version": "1.0",
+							"response": {
+								"shouldEndSession": true,
+								"outputSpeech": {
+									"type": "SSML",
+									"ssml": "<speak>You have " + unfed.length + "unfed pets, the unfed pets are: " + unfed.slice(0, unfed.length-1).join(", ") + "and " + unfed[unfed.length-1] +".</speak>"
+								}
+							}
+						});
+					}
+					else if (unfed.length == 1) {
+						res.json({
+							"version": "1.0",
+							"response": {
+								"shouldEndSession": true,
+								"outputSpeech": {
+									"type": "SSML",
+									"ssml": "<speak>You have 1 unfed pet, " + unfed[0] +".</speak>"
+								}
+							}
+						});
+					}
+					else {
+						res.json({
+							"version": "1.0",
+							"response": {
+								"shouldEndSession": true,
+								"outputSpeech": {
+									"type": "SSML",
+									"ssml": "<speak>All your pets are fed.</speak>"
+								}
+							}
+						});
+					}
+
+
+				}
+			});
 	}
 
 });
