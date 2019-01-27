@@ -905,25 +905,69 @@ app.post("/pet", requestVerifier, function(req, res) {
         }
       });
     } else {
-      res.json({
-        "version": "1.0",
-        "response": {
-          "shouldEndSession": undefined,
-          "outputSpeech": {
-            "type": "SSML",
-            "ssml": "<speak>We deleted your pet called " + req.body.request.intent.slots.name.value + ".</speak>"
-          },
-					"directives": [{
-							"type": "Alexa.Presentation.APL.RenderDocument",
-							"document": jsonexample.document,
-							"datasources": jsonexample.dataSources,
-							"token": "123"
-						}
-					]
+			var cityRef = db.collection('users').doc(req.body.session.user.userId);
+      var getDoc = cityRef.get()
+        .then(doc => {
+          if (!doc.exists) {
+            res.json({
+              "version": "1.0",
+              "response": {
+                "shouldEndSession": false,
+                "outputSpeech": {
+                  "type": "SSML",
+                  "ssml": "<speak>You dont have any pets, try  adding one!</speak>"
+                },
+								"directives": [{
+										"type": "Alexa.Presentation.APL.RenderDocument",
+										"document": jsonexample.document,
+										"datasources": jsonexample.dataSources,
+										"token": "123"
+									}
+								]
+              }
+            });
+          } else {
+            if (doc.data().hasOwnProperty(req.body.request.intent.slots.name.value)) {
+							res.json({
+				        "version": "1.0",
+				        "response": {
+				          "shouldEndSession": undefined,
+				          "outputSpeech": {
+				            "type": "SSML",
+				            "ssml": "<speak>We deleted your pet called " + req.body.request.intent.slots.name.value + ".</speak>"
+				          },
+									"directives": [{
+											"type": "Alexa.Presentation.APL.RenderDocument",
+											"document": jsonexample.document,
+											"datasources": jsonexample.dataSources,
+											"token": "123"
+										}
+									]
+				        }
+				      });
+				      deletePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
+            } else {
+              res.json({
+                "version": "1.0",
+                "response": {
+                  "shouldEndSession": false,
+                  "outputSpeech": {
+                    "type": "SSML",
+                    "ssml": "<speak>We couldn't find a pet with that name, try again.</speak>"
+                  },
+									"directives": [{
+											"type": "Alexa.Presentation.APL.RenderDocument",
+											"document": jsonexample.document,
+											"datasources": jsonexample.dataSources,
+											"token": "123"
+										}
+									]
+                }
+              });
+            }
+          }
+        });
 
-        }
-      });
-      deletePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
 
     }
 
@@ -957,7 +1001,14 @@ app.post("/pet", requestVerifier, function(req, res) {
                 "outputSpeech": {
                   "type": "SSML",
                   "ssml": "<speak>We couldn't find a pet with that name, try asking again!</speak>"
-                }
+                },
+								"directives": [{
+										"type": "Alexa.Presentation.APL.RenderDocument",
+										"document": jsonexample.document,
+										"datasources": jsonexample.dataSources,
+										"token": "123"
+									}
+								]
               }
             });
           } else {
