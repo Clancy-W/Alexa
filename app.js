@@ -350,346 +350,347 @@ app.post('/steam', requestVerifier, function(req, res) {
     });
   }
 });
+var jsonexample = {
+		"document": {
+				"type": "APL",
+				"version": "1.0",
+				"theme": "dark",
+				"import": [
+						{
+								"name": "alexa-layouts",
+								"version": "1.0.0"
+						}
+				],
+				"resources": [
+						{
+								"description": "Stock color for the light theme",
+								"colors": {
+										"colorTextPrimary": "#151920"
+								}
+						},
+						{
+								"description": "Stock color for the dark theme",
+								"when": "${viewport.theme == 'dark'}",
+								"colors": {
+										"colorTextPrimary": "#f0f1ef"
+								}
+						},
+						{
+								"description": "Standard font sizes",
+								"dimensions": {
+										"textSizeBody": 48,
+										"textSizePrimary": 27,
+										"textSizeSecondary": 23,
+										"textSizeDetails": 20,
+										"textSizeSecondaryHint": 25
+								}
+						},
+						{
+								"description": "Common spacing values",
+								"dimensions": {
+										"spacingThin": 6,
+										"spacingSmall": 12,
+										"spacingMedium": 24,
+										"spacingLarge": 48,
+										"spacingExtraLarge": 72
+								}
+						},
+						{
+								"description": "Common margins and padding",
+								"dimensions": {
+										"marginTop": 40,
+										"marginLeft": 60,
+										"marginRight": 60,
+										"marginBottom": 40
+								}
+						}
+				],
+				"styles": {
+						"textStyleBase": {
+								"description": "Base font description; set color and core font family",
+								"values": [
+										{
+												"color": "@colorTextPrimary"
+										}
+								]
+						},
+						"textStyleBase0": {
+								"description": "Thin version of basic font",
+								"extend": "textStyleBase",
+								"values": {
+										"fontWeight": "100"
+								}
+						},
+						"textStyleBase1": {
+								"description": "Light version of basic font",
+								"extend": "textStyleBase",
+								"values": {
+										"fontWeight": "300"
+								}
+						},
+						"textStyleBase2": {
+								"description": "Regular version of basic font",
+								"extend": "textStyleBase",
+								"values": {
+										"fontWeight": "500"
+								}
+						},
+						"mixinBody": {
+								"values": {
+										"fontSize": "@textSizeBody"
+								}
+						},
+						"mixinPrimary": {
+								"values": {
+										"fontSize": "@textSizePrimary"
+								}
+						},
+						"mixinDetails": {
+								"values": {
+										"fontSize": "@textSizeDetails"
+								}
+						},
+						"mixinSecondary": {
+								"values": {
+										"fontSize": "@textSizeSecondary"
+								}
+						},
+						"textStylePrimary": {
+								"extend": [
+										"textStyleBase1",
+										"mixinPrimary"
+								]
+						},
+						"textStyleSecondary": {
+								"extend": [
+										"textStyleBase0",
+										"mixinSecondary"
+								]
+						},
+						"textStyleBody": {
+								"extend": [
+										"textStyleBase1",
+										"mixinBody"
+								]
+						},
+						"textStyleSecondaryHint": {
+								"values": {
+										"fontFamily": "Bookerly",
+										"fontStyle": "italic",
+										"fontSize": "@textSizeSecondaryHint",
+										"color": "@colorTextPrimary"
+								}
+						},
+						"textStyleDetails": {
+								"extend": [
+										"textStyleBase2",
+										"mixinDetails"
+								]
+						}
+				},
+				"layouts": {
+						"FullHorizontalListItem": {
+								"parameters": [
+										"listLength"
+								],
+								"item": [
+										{
+												"type": "Container",
+												"height": "100vh",
+												"width": "100vw",
+												"alignItems": "center",
+												"justifyContent": "end",
+												"items": [
+														{
+																"type": "Image",
+																"position": "absolute",
+																"height": "100vh",
+																"width": "100vw",
+																"overlayColor": "rgba(0, 0, 0, 0.6)",
+																"source": "${data.image.sources[0].url}",
+																"scale": "best-fill",
+																"scrim": true
+														},
+														{
+																"type": "AlexaHeader",
+																"headerTitle": "${title}",
+																"headerAttributionImage": "${logo}",
+																"grow": 1
+														},
+														{
+																"type": "Text",
+																"text": "${data.textContent.primaryText.text}",
+																"style": "textStyleBody",
+																"maxLines": 1
+														},
+														{
+																"type": "Text",
+																"text": "${ordinal} | ${listLength}",
+																"paddingBottom": "20dp",
+																"color": "white",
+																"spacing": "5dp"
+														}
+												]
+										}
+								]
+						},
+						"HorizontalListItem": {
+								"item": [
+										{
+												"type": "Container",
+												"maxWidth": 528,
+												"minWidth": 312,
+												"paddingLeft": 16,
+												"paddingRight": 16,
+												"height": "100%",
+												"items": [
+														{
+																"type": "Image",
+																"source": "${data.image.sources[0].url}",
+																"height": "50vh",
+																"width": "50vh"
+														},
+														{
+																"type": "Text",
+																"text": "<b>${ordinal}.</b> ${data.textContent.primaryText.text}",
+																"style": "textStyleSecondary",
+																"maxLines": 1,
+																"spacing": 12
+														}
+												]
+										}
+								]
+						},
+						"ListTemplate2": {
+								"parameters": [
+										"backgroundImage",
+										"title",
+										"logo",
+										"hintText",
+										"listData"
+								],
+								"items": [
+										{
+												"when": "${viewport.shape == 'round'}",
+												"type": "Container",
+												"height": "100%",
+												"width": "100%",
+												"items": [
+														{
+																"type": "Sequence",
+																"scrollDirection": "horizontal",
+																"data": "${listData}",
+																"height": "100%",
+																"width": "100%",
+																"numbered": true,
+																"item": [
+																		{
+																				"type": "FullHorizontalListItem",
+																				"listLength": "${payload.listTemplate2ListData.listPage.listItems.length}"
+																		}
+																]
+														}
+												]
+										},
+										{
+												"type": "Container",
+												"height": "100vh",
+												"items": [
+														{
+																"type": "Image",
+																"source": "${backgroundImage}",
+																"scale": "best-fill",
+																"width": "100vw",
+																"height": "100vh",
+																"position": "absolute"
+														},
+														{
+																"type": "AlexaHeader",
+																"headerTitle": "${title}",
+																"headerAttributionImage": "${logo}"
+														},
+														{
+																"type": "Sequence",
+																"scrollDirection": "horizontal",
+																"paddingLeft": "@marginLeft",
+																"paddingRight": "@marginRight",
+																"data": "${listData}",
+																"height": "70vh",
+																"width": "100%",
+																"numbered": true,
+																"item": [
+																		{
+																				"type": "HorizontalListItem"
+																		}
+																]
+														},
+														{
+																"type": "AlexaFooter",
+																"footerHint": "${payload.listTemplate2ListData.hintText}"
+														}
+												]
+										}
+								]
+						}
+				},
+				"mainTemplate": {
+						"parameters": [
+								"payload"
+						],
+						"item": [
+								{
+										"type": "ListTemplate2",
+										"backgroundImage": "${payload.listTemplate2Metadata.backgroundImage.sources[0].url}",
+										"title": "${payload.listTemplate2Metadata.title}",
+										"hintText": "${payload.listTemplate2Metadata.hintText}",
+										"logo": "${payload.listTemplate2Metadata.logoUrl}",
+										"listData": "${payload.listTemplate2ListData.listPage.listItems}"
+								}
+						]
+				}
+		},
+		"dataSources": {
+				"listTemplate2Metadata": {
+						"type": "object",
+						"objectId": "lt1Metadata",
+						"backgroundImage": {
+								"contentDescription": null,
+								"smallSourceUrl": null,
+								"largeSourceUrl": null,
+								"sources": [
+										{
+												"url": "https://c.pxhere.com/photos/7e/e2/star_milky_way_background_night_starry_sky_night_sky_space_texture-674008.jpg!d",
+												"size": "small",
+												"widthPixels": 0,
+												"heightPixels": 0
+										},
+										{
+												"url": "https://c.pxhere.com/photos/7e/e2/star_milky_way_background_night_starry_sky_night_sky_space_texture-674008.jpg!d",
+												"size": "large",
+												"widthPixels": 0,
+												"heightPixels": 0
+										}
+								]
+						},
+						"title": "Pet Feeder",
+						"logoUrl": "https://d2o906d8ln7ui1.cloudfront.net/images/cheeseskillicon.png"
+				},
+				"listTemplate2ListData": {
+						"type": "list",
+						"listId": "lt2Sample",
+						"totalNumberOfItems": 10,
+						"hintText": "Try clicking on a pet!",
+						"listPage": {
+								"listItems": [
+
+								]
+						}
+				}
+		}
+};
 app.post("/pet", requestVerifier, function(req, res) {
   if (req.body.request.type === 'LaunchRequest') {
-		var jsonexample = {
-		    "document": {
-		        "type": "APL",
-		        "version": "1.0",
-		        "theme": "dark",
-		        "import": [
-		            {
-		                "name": "alexa-layouts",
-		                "version": "1.0.0"
-		            }
-		        ],
-		        "resources": [
-		            {
-		                "description": "Stock color for the light theme",
-		                "colors": {
-		                    "colorTextPrimary": "#151920"
-		                }
-		            },
-		            {
-		                "description": "Stock color for the dark theme",
-		                "when": "${viewport.theme == 'dark'}",
-		                "colors": {
-		                    "colorTextPrimary": "#f0f1ef"
-		                }
-		            },
-		            {
-		                "description": "Standard font sizes",
-		                "dimensions": {
-		                    "textSizeBody": 48,
-		                    "textSizePrimary": 27,
-		                    "textSizeSecondary": 23,
-		                    "textSizeDetails": 20,
-		                    "textSizeSecondaryHint": 25
-		                }
-		            },
-		            {
-		                "description": "Common spacing values",
-		                "dimensions": {
-		                    "spacingThin": 6,
-		                    "spacingSmall": 12,
-		                    "spacingMedium": 24,
-		                    "spacingLarge": 48,
-		                    "spacingExtraLarge": 72
-		                }
-		            },
-		            {
-		                "description": "Common margins and padding",
-		                "dimensions": {
-		                    "marginTop": 40,
-		                    "marginLeft": 60,
-		                    "marginRight": 60,
-		                    "marginBottom": 40
-		                }
-		            }
-		        ],
-		        "styles": {
-		            "textStyleBase": {
-		                "description": "Base font description; set color and core font family",
-		                "values": [
-		                    {
-		                        "color": "@colorTextPrimary"
-		                    }
-		                ]
-		            },
-		            "textStyleBase0": {
-		                "description": "Thin version of basic font",
-		                "extend": "textStyleBase",
-		                "values": {
-		                    "fontWeight": "100"
-		                }
-		            },
-		            "textStyleBase1": {
-		                "description": "Light version of basic font",
-		                "extend": "textStyleBase",
-		                "values": {
-		                    "fontWeight": "300"
-		                }
-		            },
-		            "textStyleBase2": {
-		                "description": "Regular version of basic font",
-		                "extend": "textStyleBase",
-		                "values": {
-		                    "fontWeight": "500"
-		                }
-		            },
-		            "mixinBody": {
-		                "values": {
-		                    "fontSize": "@textSizeBody"
-		                }
-		            },
-		            "mixinPrimary": {
-		                "values": {
-		                    "fontSize": "@textSizePrimary"
-		                }
-		            },
-		            "mixinDetails": {
-		                "values": {
-		                    "fontSize": "@textSizeDetails"
-		                }
-		            },
-		            "mixinSecondary": {
-		                "values": {
-		                    "fontSize": "@textSizeSecondary"
-		                }
-		            },
-		            "textStylePrimary": {
-		                "extend": [
-		                    "textStyleBase1",
-		                    "mixinPrimary"
-		                ]
-		            },
-		            "textStyleSecondary": {
-		                "extend": [
-		                    "textStyleBase0",
-		                    "mixinSecondary"
-		                ]
-		            },
-		            "textStyleBody": {
-		                "extend": [
-		                    "textStyleBase1",
-		                    "mixinBody"
-		                ]
-		            },
-		            "textStyleSecondaryHint": {
-		                "values": {
-		                    "fontFamily": "Bookerly",
-		                    "fontStyle": "italic",
-		                    "fontSize": "@textSizeSecondaryHint",
-		                    "color": "@colorTextPrimary"
-		                }
-		            },
-		            "textStyleDetails": {
-		                "extend": [
-		                    "textStyleBase2",
-		                    "mixinDetails"
-		                ]
-		            }
-		        },
-		        "layouts": {
-		            "FullHorizontalListItem": {
-		                "parameters": [
-		                    "listLength"
-		                ],
-		                "item": [
-		                    {
-		                        "type": "Container",
-		                        "height": "100vh",
-		                        "width": "100vw",
-		                        "alignItems": "center",
-		                        "justifyContent": "end",
-		                        "items": [
-		                            {
-		                                "type": "Image",
-		                                "position": "absolute",
-		                                "height": "100vh",
-		                                "width": "100vw",
-		                                "overlayColor": "rgba(0, 0, 0, 0.6)",
-		                                "source": "${data.image.sources[0].url}",
-		                                "scale": "best-fill",
-		                                "scrim": true
-		                            },
-		                            {
-		                                "type": "AlexaHeader",
-		                                "headerTitle": "${title}",
-		                                "headerAttributionImage": "${logo}",
-		                                "grow": 1
-		                            },
-		                            {
-		                                "type": "Text",
-		                                "text": "${data.textContent.primaryText.text}",
-		                                "style": "textStyleBody",
-		                                "maxLines": 1
-		                            },
-		                            {
-		                                "type": "Text",
-		                                "text": "${ordinal} | ${listLength}",
-		                                "paddingBottom": "20dp",
-		                                "color": "white",
-		                                "spacing": "5dp"
-		                            }
-		                        ]
-		                    }
-		                ]
-		            },
-		            "HorizontalListItem": {
-		                "item": [
-		                    {
-		                        "type": "Container",
-		                        "maxWidth": 528,
-		                        "minWidth": 312,
-		                        "paddingLeft": 16,
-		                        "paddingRight": 16,
-		                        "height": "100%",
-		                        "items": [
-		                            {
-		                                "type": "Image",
-		                                "source": "${data.image.sources[0].url}",
-		                                "height": "50vh",
-		                                "width": "50vh"
-		                            },
-		                            {
-		                                "type": "Text",
-		                                "text": "<b>${ordinal}.</b> ${data.textContent.primaryText.text}",
-		                                "style": "textStyleSecondary",
-		                                "maxLines": 1,
-		                                "spacing": 12
-		                            }
-		                        ]
-		                    }
-		                ]
-		            },
-		            "ListTemplate2": {
-		                "parameters": [
-		                    "backgroundImage",
-		                    "title",
-		                    "logo",
-		                    "hintText",
-		                    "listData"
-		                ],
-		                "items": [
-		                    {
-		                        "when": "${viewport.shape == 'round'}",
-		                        "type": "Container",
-		                        "height": "100%",
-		                        "width": "100%",
-		                        "items": [
-		                            {
-		                                "type": "Sequence",
-		                                "scrollDirection": "horizontal",
-		                                "data": "${listData}",
-		                                "height": "100%",
-		                                "width": "100%",
-		                                "numbered": true,
-		                                "item": [
-		                                    {
-		                                        "type": "FullHorizontalListItem",
-		                                        "listLength": "${payload.listTemplate2ListData.listPage.listItems.length}"
-		                                    }
-		                                ]
-		                            }
-		                        ]
-		                    },
-		                    {
-		                        "type": "Container",
-		                        "height": "100vh",
-		                        "items": [
-		                            {
-		                                "type": "Image",
-		                                "source": "${backgroundImage}",
-		                                "scale": "best-fill",
-		                                "width": "100vw",
-		                                "height": "100vh",
-		                                "position": "absolute"
-		                            },
-		                            {
-		                                "type": "AlexaHeader",
-		                                "headerTitle": "${title}",
-		                                "headerAttributionImage": "${logo}"
-		                            },
-		                            {
-		                                "type": "Sequence",
-		                                "scrollDirection": "horizontal",
-		                                "paddingLeft": "@marginLeft",
-		                                "paddingRight": "@marginRight",
-		                                "data": "${listData}",
-		                                "height": "70vh",
-		                                "width": "100%",
-		                                "numbered": true,
-		                                "item": [
-		                                    {
-		                                        "type": "HorizontalListItem"
-		                                    }
-		                                ]
-		                            },
-		                            {
-		                                "type": "AlexaFooter",
-		                                "footerHint": "${payload.listTemplate2ListData.hintText}"
-		                            }
-		                        ]
-		                    }
-		                ]
-		            }
-		        },
-		        "mainTemplate": {
-		            "parameters": [
-		                "payload"
-		            ],
-		            "item": [
-		                {
-		                    "type": "ListTemplate2",
-		                    "backgroundImage": "${payload.listTemplate2Metadata.backgroundImage.sources[0].url}",
-		                    "title": "${payload.listTemplate2Metadata.title}",
-		                    "hintText": "${payload.listTemplate2Metadata.hintText}",
-		                    "logo": "${payload.listTemplate2Metadata.logoUrl}",
-		                    "listData": "${payload.listTemplate2ListData.listPage.listItems}"
-		                }
-		            ]
-		        }
-		    },
-		    "dataSources": {
-		        "listTemplate2Metadata": {
-		            "type": "object",
-		            "objectId": "lt1Metadata",
-		            "backgroundImage": {
-		                "contentDescription": null,
-		                "smallSourceUrl": null,
-		                "largeSourceUrl": null,
-		                "sources": [
-		                    {
-		                        "url": "https://c.pxhere.com/photos/7e/e2/star_milky_way_background_night_starry_sky_night_sky_space_texture-674008.jpg!d",
-		                        "size": "small",
-		                        "widthPixels": 0,
-		                        "heightPixels": 0
-		                    },
-		                    {
-		                        "url": "https://c.pxhere.com/photos/7e/e2/star_milky_way_background_night_starry_sky_night_sky_space_texture-674008.jpg!d",
-		                        "size": "large",
-		                        "widthPixels": 0,
-		                        "heightPixels": 0
-		                    }
-		                ]
-		            },
-		            "title": "Pet Feeder",
-		            "logoUrl": "https://d2o906d8ln7ui1.cloudfront.net/images/cheeseskillicon.png"
-		        },
-		        "listTemplate2ListData": {
-		            "type": "list",
-		            "listId": "lt2Sample",
-		            "totalNumberOfItems": 10,
-		            "hintText": "Try clicking on a pet!",
-		            "listPage": {
-		                "listItems": [
 
-		                ]
-		            }
-		        }
-		    }
-		};
 		db.collection('users').doc(req.body.session.user.userId).get().then(doc => {
 			dat = doc.data();
 			temp = [];
@@ -729,7 +730,14 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To find out how to add a pet ask, how do I add a pet? To find out how to delete a pet ask, how do I delete a pet? To find out how to feed a pet, ask how do I feed a pet?</speak>"
-        }
+        },
+				"directives": [{
+						"type": "Alexa.Presentation.APL.RenderDocument",
+						"document": jsonexample.document,
+						"datasources": jsonexample.dataSources,
+						"token": "123"
+					}
+				]
       }
     });
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddHelp') {
@@ -740,7 +748,14 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To add a pet, just say, Alexa, add a pet, come on, try it yourself!</speak>"
-        }
+        },
+				"directives": [{
+						"type": "Alexa.Presentation.APL.RenderDocument",
+						"document": jsonexample.document,
+						"datasources": jsonexample.dataSources,
+						"token": "123"
+					}
+				]
       }
     });
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'DeleteHelp') {
@@ -751,7 +766,14 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To delete a pet, just say, Alexa, delete a pet, come on, try it yourself!</speak>"
-        }
+        },
+				"directives": [{
+						"type": "Alexa.Presentation.APL.RenderDocument",
+						"document": jsonexample.document,
+						"datasources": jsonexample.dataSources,
+						"token": "123"
+					}
+				]
       }
     });
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'FeedHelp') {
@@ -762,7 +784,14 @@ app.post("/pet", requestVerifier, function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>To feed a pet, just say, Alexa, has my pet been fed, come on, try it yourself!</speak>"
-        }
+        },
+				"directives": [{
+						"type": "Alexa.Presentation.APL.RenderDocument",
+						"document": jsonexample.document,
+						"datasources": jsonexample.dataSources,
+						"token": "123"
+					}
+				]
       }
     });
   } else if (req.body.request.type === 'IntentRequest' && req.body.request.intent.name === 'AddPet') {
@@ -773,7 +802,13 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            }
+            },
+						{
+							"type": "Alexa.Presentation.APL.RenderDocument",
+							"document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+						}
           ]
         }
       });
@@ -784,7 +819,13 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            }
+            },
+						{
+							"type": "Alexa.Presentation.APL.RenderDocument",
+							"document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+						}
           ]
         }
       });
@@ -795,7 +836,13 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            }
+            },
+						{
+							"type": "Alexa.Presentation.APL.RenderDocument",
+							"document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+						}
           ]
         }
       });
@@ -807,18 +854,32 @@ app.post("/pet", requestVerifier, function(req, res) {
           "outputSpeech": {
             "type": "SSML",
             "ssml": "<speak>We cancelled it, try asking again!</speak>"
-          }
+          },
+	        "directives": [{
+	            "type": "Alexa.Presentation.APL.RenderDocument",
+	            "document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+	          }
+	        ]
         }
       });
     } else {
       res.json({
         "version": "1.0",
         "response": {
-          "shouldEndSession": true,
+          "shouldEndSession": undefined,
           "outputSpeech": {
             "type": "SSML",
             "ssml": "<speak>We added your pet " + req.body.request.intent.slots.pet.value + " called " + req.body.request.intent.slots.name.value + ".</speak>"
-          }
+          },
+					"directives": [{
+							"type": "Alexa.Presentation.APL.RenderDocument",
+							"document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+						}
+					]
         }
       });
       addPet(req.body.session.user.userId, req.body.request.intent.slots.name.value, req.body.request.intent.slots.pet.value);
@@ -833,7 +894,13 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            }
+            },
+						{
+							"type": "Alexa.Presentation.APL.RenderDocument",
+							"document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+						}
           ]
         }
       });
@@ -841,11 +908,19 @@ app.post("/pet", requestVerifier, function(req, res) {
       res.json({
         "version": "1.0",
         "response": {
-          "shouldEndSession": true,
+          "shouldEndSession": undefined,
           "outputSpeech": {
             "type": "SSML",
             "ssml": "<speak>We deleted your pet called " + req.body.request.intent.slots.name.value + ".</speak>"
-          }
+          },
+					"directives": [{
+							"type": "Alexa.Presentation.APL.RenderDocument",
+							"document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+						}
+					]
+
         }
       });
       deletePet(req.body.session.user.userId, req.body.request.intent.slots.name.value);
@@ -860,7 +935,13 @@ app.post("/pet", requestVerifier, function(req, res) {
           "directives": [{
               "type": "Dialog.Delegate",
               "updatedIntent": req.body.request.intent
-            }
+            },
+						{
+							"type": "Alexa.Presentation.APL.RenderDocument",
+							"document": jsonexample.document,
+							"datasources": jsonexample.dataSources,
+							"token": "123"
+						}
           ]
         }
       });
@@ -893,7 +974,13 @@ app.post("/pet", requestVerifier, function(req, res) {
                       "directives": [{
                           "type": "Dialog.Delegate",
                           "updatedIntent": req.body.request.intent
-                        }
+                        },
+												{
+													"type": "Alexa.Presentation.APL.RenderDocument",
+													"document": jsonexample.document,
+													"datasources": jsonexample.dataSources,
+													"token": "123"
+												}
                       ]
                     }
                   });
@@ -901,11 +988,18 @@ app.post("/pet", requestVerifier, function(req, res) {
                   res.json({
                     "version": "1.0",
                     "response": {
-                      "shouldEndSession": true,
+                      "shouldEndSession": undefined,
                       "outputSpeech": {
                         "type": "SSML",
                         "ssml": "<speak>" + req.body.request.intent.slots.name.value + " has already been fed.</speak>"
-                      }
+                      },
+											"directives": [{
+													"type": "Alexa.Presentation.APL.RenderDocument",
+													"document": jsonexample.document,
+													"datasources": jsonexample.dataSources,
+													"token": "123"
+												}
+											]
                     }
                   });
                 }
@@ -915,22 +1009,36 @@ app.post("/pet", requestVerifier, function(req, res) {
                   res.json({
                     "version": "1.0",
                     "response": {
-                      "shouldEndSession": true,
+                      "shouldEndSession": undefined,
                       "outputSpeech": {
                         "type": "SSML",
                         "ssml": "<speak>Ok, We fed  " + req.body.request.intent.slots.name.value + "!</speak>"
-                      }
+                      },
+											"directives": [{
+													"type": "Alexa.Presentation.APL.RenderDocument",
+													"document": jsonexample.document,
+													"datasources": jsonexample.dataSources,
+													"token": "123"
+												}
+											]
                     }
                   });
                 } else {
                   res.json({
                     "version": "1.0",
                     "response": {
-                      "shouldEndSession": true,
+                      "shouldEndSession": undefined,
                       "outputSpeech": {
                         "type": "SSML",
                         "ssml": "<speak>Ok, We did not feed  " + req.body.request.intent.slots.name.value + ".</speak>"
-                      }
+                      },
+											"directives": [{
+													"type": "Alexa.Presentation.APL.RenderDocument",
+													"document": jsonexample.document,
+													"datasources": jsonexample.dataSources,
+													"token": "123"
+												}
+											]
                     }
                   });
                 }
@@ -943,7 +1051,14 @@ app.post("/pet", requestVerifier, function(req, res) {
                   "outputSpeech": {
                     "type": "SSML",
                     "ssml": "<speak>We couldn't find a pet with that name, try again.</speak>"
-                  }
+                  },
+									"directives": [{
+											"type": "Alexa.Presentation.APL.RenderDocument",
+											"document": jsonexample.document,
+											"datasources": jsonexample.dataSources,
+											"token": "123"
+										}
+									]
                 }
               });
             }
@@ -963,7 +1078,14 @@ app.post("/pet", requestVerifier, function(req, res) {
 							"outputSpeech": {
 								"type": "SSML",
 								"ssml": "<speak>You don't seem to have any pets, to add one, just say add a pet.</speak>"
-							}
+							},
+							"directives": [{
+									"type": "Alexa.Presentation.APL.RenderDocument",
+									"document": jsonexample.document,
+									"datasources": jsonexample.dataSources,
+									"token": "123"
+								}
+							]
 						}
 					});
 				} else if (req.body.request.intent.confirmationStatus == "NONE") {
@@ -974,6 +1096,12 @@ app.post("/pet", requestVerifier, function(req, res) {
 							"directives": [{
 									"type": "Dialog.Delegate",
 									"updatedIntent": req.body.request.intent
+								},
+								{
+									"type": "Alexa.Presentation.APL.RenderDocument",
+									"document": jsonexample.document,
+									"datasources": jsonexample.dataSources,
+									"token": "123"
 								}
 							]
 						}
@@ -984,11 +1112,18 @@ app.post("/pet", requestVerifier, function(req, res) {
 					res.json({
 						"version": "1.0",
 						"response": {
-							"shouldEndSession": true,
+							"shouldEndSession": undefined,
 							"outputSpeech": {
 								"type": "SSML",
 								"ssml": "<speak>Ok, We fed  all of your pets.</speak>"
-							}
+							},
+							"directives": [{
+									"type": "Alexa.Presentation.APL.RenderDocument",
+									"document": jsonexample.document,
+									"datasources": jsonexample.dataSources,
+									"token": "123"
+								}
+							]
 						}
 					});
 					for (var i in doc.data()) {
@@ -998,11 +1133,18 @@ app.post("/pet", requestVerifier, function(req, res) {
 					res.json({
 						"version": "1.0",
 						"response": {
-							"shouldEndSession": true,
+							"shouldEndSession": undefined,
 							"outputSpeech": {
 								"type": "SSML",
 								"ssml": "<speak>Ok, We did not feed  all of your pets.</speak>"
-							}
+							},
+							"directives": [{
+									"type": "Alexa.Presentation.APL.RenderDocument",
+									"document": jsonexample.document,
+									"datasources": jsonexample.dataSources,
+									"token": "123"
+								}
+							]
 						}
 					});
 				}
@@ -1019,7 +1161,14 @@ app.post("/pet", requestVerifier, function(req, res) {
 							"outputSpeech": {
 								"type": "SSML",
 								"ssml": "<speak>You don't seem to have any pets, to add one, just say add a pet.</speak>"
-							}
+							},
+							"directives": [{
+									"type": "Alexa.Presentation.APL.RenderDocument",
+									"document": jsonexample.document,
+									"datasources": jsonexample.dataSources,
+									"token": "123"
+								}
+							]
 						}
 					});
 				} else {
@@ -1036,11 +1185,18 @@ app.post("/pet", requestVerifier, function(req, res) {
 						res.json({
 							"version": "1.0",
 							"response": {
-								"shouldEndSession": true,
+								"shouldEndSession": undefined,
 								"outputSpeech": {
 									"type": "SSML",
-									"ssml": "<speak>You have " + unfed.length + "unfed pets, the unfed pets are: " + unfed.slice(0, unfed.length-1).join(", ") + "and " + unfed[unfed.length-1] +".</speak>"
-								}
+									"ssml": "<speak>You have " + unfed.length + " unfed pets, the unfed pets are: " + unfed.slice(0, unfed.length-1).join(", ") + " and " + unfed[unfed.length-1] +".</speak>"
+								},
+								"directives": [{
+										"type": "Alexa.Presentation.APL.RenderDocument",
+										"document": jsonexample.document,
+										"datasources": jsonexample.dataSources,
+										"token": "123"
+									}
+								]
 							}
 						});
 					}
@@ -1048,11 +1204,18 @@ app.post("/pet", requestVerifier, function(req, res) {
 						res.json({
 							"version": "1.0",
 							"response": {
-								"shouldEndSession": true,
+								"shouldEndSession": undefined,
 								"outputSpeech": {
 									"type": "SSML",
 									"ssml": "<speak>You have 1 unfed pet, " + unfed[0] +".</speak>"
-								}
+								},
+								"directives": [{
+										"type": "Alexa.Presentation.APL.RenderDocument",
+										"document": jsonexample.document,
+										"datasources": jsonexample.dataSources,
+										"token": "123"
+									}
+								]
 							}
 						});
 					}
@@ -1060,11 +1223,18 @@ app.post("/pet", requestVerifier, function(req, res) {
 						res.json({
 							"version": "1.0",
 							"response": {
-								"shouldEndSession": true,
+								"shouldEndSession": undefined,
 								"outputSpeech": {
 									"type": "SSML",
 									"ssml": "<speak>All your pets are fed.</speak>"
-								}
+								},
+								"directives": [{
+										"type": "Alexa.Presentation.APL.RenderDocument",
+										"document": jsonexample.document,
+										"datasources": jsonexample.dataSources,
+										"token": "123"
+									}
+								]
 							}
 						});
 					}
