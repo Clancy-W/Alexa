@@ -1293,6 +1293,28 @@ app.post("/pet", requestVerifier, function(req, res) {
 
 				}
 			});
+	} else if (req.body.request.type === "IntentRequest" && req.body.request.intent.name === "AMAZON.StopIntent") {
+		res.json({
+			"version": "1.0",
+			"response": {
+				"shouldEndSession": true,
+				"outputSpeech": {
+					"type": "SSML",
+					"ssml": "<speak>Goodbye.</speak>"
+				}
+			}
+		});
+	} else {
+		res.json({
+			"version": "1.0",
+			"response": {
+				"shouldEndSession": false,
+				"outputSpeech": {
+					"type": "SSML",
+					"ssml": "<speak>Sorry, I couldn't understand what you said, try saying it again.</speak>"
+				}
+			}
+		});
 	}
 
 });
