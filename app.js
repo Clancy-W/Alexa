@@ -868,7 +868,7 @@ app.post("/pet", requestVerifier, function(req, res) {
       res.json({
         "version": "1.0",
         "response": {
-          "shouldEndSession": undefined,
+          "shouldEndSession": true,
           "outputSpeech": {
             "type": "SSML",
             "ssml": "<speak>We added your pet " + req.body.request.intent.slots.pet.value + " called " + req.body.request.intent.slots.name.value + ".</speak>"
@@ -931,7 +931,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 							res.json({
 				        "version": "1.0",
 				        "response": {
-				          "shouldEndSession": undefined,
+				          "shouldEndSession": true,
 				          "outputSpeech": {
 				            "type": "SSML",
 				            "ssml": "<speak>We deleted your pet called " + req.body.request.intent.slots.name.value + ".</speak>"
@@ -1039,7 +1039,7 @@ app.post("/pet", requestVerifier, function(req, res) {
                   res.json({
                     "version": "1.0",
                     "response": {
-                      "shouldEndSession": undefined,
+                      "shouldEndSession": true,
                       "outputSpeech": {
                         "type": "SSML",
                         "ssml": "<speak>" + req.body.request.intent.slots.name.value + " has already been fed.</speak>"
@@ -1060,7 +1060,7 @@ app.post("/pet", requestVerifier, function(req, res) {
                   res.json({
                     "version": "1.0",
                     "response": {
-                      "shouldEndSession": undefined,
+                      "shouldEndSession": true,
                       "outputSpeech": {
                         "type": "SSML",
                         "ssml": "<speak>Ok, We fed  " + req.body.request.intent.slots.name.value + "!</speak>"
@@ -1078,7 +1078,7 @@ app.post("/pet", requestVerifier, function(req, res) {
                   res.json({
                     "version": "1.0",
                     "response": {
-                      "shouldEndSession": undefined,
+                      "shouldEndSession": true,
                       "outputSpeech": {
                         "type": "SSML",
                         "ssml": "<speak>Ok, We did not feed  " + req.body.request.intent.slots.name.value + ".</speak>"
@@ -1163,7 +1163,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 					res.json({
 						"version": "1.0",
 						"response": {
-							"shouldEndSession": undefined,
+							"shouldEndSession": true,
 							"outputSpeech": {
 								"type": "SSML",
 								"ssml": "<speak>Ok, We fed  all of your pets.</speak>"
@@ -1184,7 +1184,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 					res.json({
 						"version": "1.0",
 						"response": {
-							"shouldEndSession": undefined,
+							"shouldEndSession": true,
 							"outputSpeech": {
 								"type": "SSML",
 								"ssml": "<speak>Ok, We did not feed  all of your pets.</speak>"
@@ -1236,7 +1236,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						res.json({
 							"version": "1.0",
 							"response": {
-								"shouldEndSession": undefined,
+								"shouldEndSession": true,
 								"outputSpeech": {
 									"type": "SSML",
 									"ssml": "<speak>You have " + unfed.length + " unfed pets, the unfed pets are: " + unfed.slice(0, unfed.length-1).join(", ") + " and " + unfed[unfed.length-1] +".</speak>"
@@ -1255,7 +1255,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						res.json({
 							"version": "1.0",
 							"response": {
-								"shouldEndSession": undefined,
+								"shouldEndSession": true,
 								"outputSpeech": {
 									"type": "SSML",
 									"ssml": "<speak>You have 1 unfed pet, " + unfed[0] +".</speak>"
@@ -1274,7 +1274,7 @@ app.post("/pet", requestVerifier, function(req, res) {
 						res.json({
 							"version": "1.0",
 							"response": {
-								"shouldEndSession": undefined,
+								"shouldEndSession": true,
 								"outputSpeech": {
 									"type": "SSML",
 									"ssml": "<speak>All your pets are fed.</speak>"
